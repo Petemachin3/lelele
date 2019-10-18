@@ -50,13 +50,13 @@ html,body{
 .inhalt{
   border-radius: 15px;
   margin-left: 5px;
-  margin-right: 5px;
+  margin-right: 15px;
   grid-area: inhalt;
   font-size: 0.875em;
   padding: 1em 1.5em 1.5em 1.75em;
   line-height: 1.6;
   background-color: lightblue;
-  height: 350px;
+  height: 320px;
 }
 
 
@@ -132,11 +132,11 @@ html,body{
   margin-left: 5em;
 }
 
-#Banner{
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0.3em;
-  width: 170px;
+
+#Banner a{
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
 }
 
 #Banner h1{
@@ -144,6 +144,3 @@ html,body{
   margin: 0;
 }
 
-#Banner a{
-  font-size: 0.1pt;
-}
