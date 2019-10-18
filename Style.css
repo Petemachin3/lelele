@@ -1,4 +1,5 @@
 html,body{
+  background-color: lightgreen;
   width: 100%;
   height: 100%;
   margin: 0;
@@ -21,12 +22,9 @@ html,body{
 
 .header{
   grid-area: header;
-  margin-left: 0;
   padding: 10px 20px 10px 0;
-  text-align: left;
   font-size: 9pt;
   background-color: lightgreen;
-  border-bottom: 1px solid black;
 }
 
 .header div{
@@ -34,13 +32,14 @@ html,body{
 }
 
 .side{
+  border-radius: 15px;
   grid-area: side;
   background-color: white;
-	padding: 0 0.3em 0 0.3em;
-  margin: 0 0 0em 0em;
-  /*background-color: #f6f6f6;*/
+  padding: 0 0.3em 0 0.3em;
+  margin-left: 5px;
+  margin-bottom: 5px;
   background-color: lightgrey;
-  border-right: 1px solid black;
+  border: 1px solid black;
 }
 
 .pic{
@@ -48,8 +47,10 @@ html,body{
   width: auto;
 }
 .inhalt{
+  border-radius: 15px;
+  margin-left: 1%;
+  margin-right: 5px;
   grid-area: inhalt;
-  background-color: white;
   font-size: 0.875em;
   padding: 1em 1.5em 1.5em 1.75em;
   line-height: 1.6;
@@ -58,10 +59,10 @@ html,body{
 }
 
 .box{
-  width: content-minimum%;
+  border-radius: 5px;
+  width: content-minimum;
   height: content-minimum;
   border: 1px solid black;
-  /*margin: 5px;*/
   padding: 5px;
   display: inline-block;
 }
@@ -69,15 +70,17 @@ html,body{
 .footer{
   grid-area: footer;
   font-size: 70%;
-  /*background-color: #f6f6f6;*/
-  background-color: yellow;
+  background-color: lightgreen;
+  padding: 1em 1.5em 1.5em 1.75em;
+  margin-left: 1%;
 }
 
 .topics li{
-	margin-bottom: 0.48em;
+  margin: 0.5em;
   list-style-type: none;
   border: 1px solid black;
-  padding: 5px;
+  border-radius: 5px;
+  padding: 7px;
 }
 
 .topics ul{
