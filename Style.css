@@ -11,8 +11,7 @@ html,body{
   width: 100%;
   height: 100%;
   display: grid;
-  /*grid-template-columns: 20% auto;*/
-  grid-template-columns: minmax(180px, 20%) auto;
+  grid-template-columns: minmax(200px, 20%) auto;
   grid-template-rows: min-content min-content min-content;
   grid-template-areas:
     "header header"
@@ -40,6 +39,7 @@ html,body{
   margin-bottom: 5px;
   background-color: lightgrey;
   border: 1px solid black;
+  position: relative;
 }
 
 .pic{
@@ -49,7 +49,7 @@ html,body{
 
 .inhalt{
   border-radius: 15px;
-  margin-left: 1%;
+  margin-left: 5px;
   margin-right: 5px;
   grid-area: inhalt;
   font-size: 0.875em;
@@ -59,7 +59,9 @@ html,body{
   height: 350px;
 }
 
-.box{
+
+.ausgabefeld li{
+  list-style-type: none;
   border-radius: 5px;
   width: content-minimum;
   height: content-minimum;
@@ -72,12 +74,15 @@ html,body{
   grid-area: footer;
   font-size: 70%;
   background-color: lightgreen;
-  padding: 1em 1.5em 1.5em 1.75em;
   margin-left: 1%;
 }
 
 .footerimage{
   height: 15px;
+}
+
+.topics ul{
+  padding-left: 0;
 }
 
 .topics li{
@@ -88,16 +93,35 @@ html,body{
   padding: 7px;
 }
 
-.topics ul{
+.neueliste_1{
   padding-left: 0;
 }
 
-.ausgabefeld{
-  padding: 5px;
+.neueliste_2{
+  margin: 0.5em;
+  list-style-type: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 7px;
 }
 
-.ausgabefeld li{
-  list-style-type: none;
+#Unten{
+  width: 96%;
+  position: absolute;
+  bottom: 0;
+}
+
+#UntenHinzufügen{
+  padding-right: 1px;
+  padding-top: 1px;
+  height: 15px;
+  float: right;
+}
+
+#UntenHinzufügen:hover{
+  padding-right: 0px;
+  padding-top: 0px;
+  height: 18px;
 }
 
 #Eingabe{
