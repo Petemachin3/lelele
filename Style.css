@@ -46,6 +46,7 @@ html,body{
   margin: 2em;
   width: auto;
 }
+
 .inhalt{
   border-radius: 15px;
   margin-left: 1%;
@@ -73,6 +74,10 @@ html,body{
   background-color: lightgreen;
   padding: 1em 1.5em 1.5em 1.75em;
   margin-left: 1%;
+}
+
+.footerimage{
+  height: 15px;
 }
 
 .topics li{
