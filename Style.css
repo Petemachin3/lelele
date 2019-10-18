@@ -109,6 +109,8 @@ html,body{
 }
 
 #Banner{
+  margin-left: auto;
+  margin-right: auto;
   padding: 0.3em;
   width: 170px;
 }
