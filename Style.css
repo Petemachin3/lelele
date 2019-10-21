@@ -16,7 +16,7 @@ html,body{
   grid-template-areas:
     "header header"
     "side inhalt"
-    "side footer"
+    "footer footer"
 }
 
 .header{
@@ -155,8 +155,8 @@ html,body{
 
 
 #Banner a{
-  display: flex; 
-  justify-content: center; 
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
