@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Listen</title>
+    <script language="javascript" type="text/javascript" src="script.js"></script>
     <link rel="stylesheet" href="Style.css">
     <link rel="icon" href="Logo3.png" type="image/x-icon" />
   </head>
@@ -19,19 +20,22 @@
       <div class="side">
         <div class="topics">
           <ul>
-            <li id="Überschrift">Meine Listen</li>
+            <li id="Überschrift">Meine Listen
+              <img id="open-dialog" src="hinzufügen.png" alt="logo">
+              <dialog role="dialog" aria-labelledby="dialog-heading">
+                <button id="close-dialog">Schließen</button>
+                <h2 id="dialog-heading">Info</h2>
+                <p> Dies ist eine zugängliche Dialog-Box, die Sie auch mit der Tastatur benutzen können.</p>
+              </dialog>
+            </li>
             <li id="AktuelleListe">Liste x</li>
             <li class="nichtaktuelleListe">Liste y</li>
             <li class="nichtaktuelleListe">Liste z</li>
           </ul>
         </div>
-        <div id="Unten">
-          <ul class="neueliste_1">
-            <li class="neueliste_2">Neue Liste<img id="UntenHinzufügen" src="hinzufügen.png" alt="logo"></li>
-          </ul>
-        </div>
       </div>
       <div class="inhalt">
+        <p>hier muss button zum element hinzufügen</p>
         <ul>
           <li>Element 2898989898</li>
           <li>Element 289898</li>
