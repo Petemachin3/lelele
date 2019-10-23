@@ -114,16 +114,12 @@ html,body{
 }
 
 #Hinzufügen{
-  padding-right: 1px;
-  padding-top: 1px;
   height: 15px;
   float: right;
 }
 
 #Hinzufügen:hover{
-  padding-right: 0px;
-  padding-top: 0px;
-  height: 18px;
+  transform:scale(1.7);
 }
 
 #Eingabe{
@@ -134,16 +130,8 @@ html,body{
   margin-left: 5em;
 }
 
-
 #Banner a{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#Banner h1{
-  text-align: center;
-  margin: 0;
+  padding-left: 40px;
 }
 
 #open-dialog {
@@ -217,4 +205,91 @@ dialog #close-dialog {
   outline: 0;
 }
 
+#Element_hinzufügen{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  height: 70px;
+}
+
+#Listenname{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  height: 0px;
+}
+
+#Listenname:hover{
+  cursor: default;
+}
+
 /*------------------------------------*/
+
+.inhalt h1{
+  padding-bottom: 170px;
+}
+
+.inhalt #open-dialog2 {
+  height: 50px;
+}
+
+.inhalt #open-dialog2:hover{
+  transform:scale(1.3);
+  cursor: pointer;
+}
+
+.inhalt dialog {
+  padding-left: 50%;
+	display: none;
+	position: relative;
+	background: white;
+	border: 1px solid grey;
+	border-radius: 0.5em;
+	z-index: 1002;
+	width: 100%;
+	height: auto;
+}
+
+.inhalt dialog[open="open"] {
+	display: block;
+}
+
+@media (min-width: 20em) {
+	.inhalt dialog {
+    overflow: visible;
+    position: fixed;
+    margin-left: calc(10%-500px);
+    margin-right: calc(10%+500px);
+    padding-left: 2em;
+    padding-right: 2em;
+    width: 30%;
+    min-width: 300px;
+  }
+}
+
+.inhalt dialog::backdrop,
+#backdrop2 {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.inhalt dialog #close-dialog2 {
+	position: absolute;
+  align-content: center;
+  text-align: center;
+  margin-left: 68%;
+  height: 30px;
+  width: 20%;
+  min-width: 50px;
+  cursor: pointer;
+	background-color: red;
+	color: white;
+	font-weight: bold;
+	font-size: 0.74em;
+  border-radius: 0.5em;
+  outline: 0;
+}
