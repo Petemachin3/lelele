@@ -29,5 +29,21 @@ document.addEventListener("DOMContentLoaded", function () {
 			div.parentNode.removeChild(div);
 			lastFocus.focus();
 		}
-	}
+    }
 });
+
+var startbutton = document.getElementById("start"),
+	dialog = document.getElementById('dialog'),
+	Anmeldung = document.getElementById("Anmeldung"),
+	Abbruch = document.getElementById("Abbruch");
+startbutton.addEventListener('click', zeigeFenster);
+Anmeldung.addEventListener('click', schließeFenster);
+Abbruch.addEventListener('click', schließeFenster);
+
+function zeigeFenster() {
+	dialog.showModal();
+}
+
+function schließeFenster() {
+	dialog.close();
+}

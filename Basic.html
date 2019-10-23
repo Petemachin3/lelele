@@ -37,14 +37,19 @@
             Listenname X
           </h1>
         </div>
-        <div id="Element_hinzufügen">
-          <img id="open-dialog2" src="hinzufügen.png" alt="logo2">
-          <dialog role="dialog" aria-labelledby="dialog-heading2">
-            <button id="close-dialog2">Schließen</button>
-            <h2 id="dialog-heading2">Info</h2>
-            <p> Dies ist eine zugängliche Dialog-Box, die Sie auch mit der Tastatur benutzen können.</p>
-          </dialog>
+        <div>
+        <button id="start"><img id="startbild" src="hinzufügen.png" alt="hinzufügen"></button>
+	      <dialog id="dialog">
+		      <h2>Anmeldung</h2>
+		      <form action="#" method="post">
+			      <label for="email">Bitte geben Sie Ihre Email-Adresse an: </label>
+            <input id="email" type="email"/> 
+          </form>
+		      <button id="Anmeldung">Anmelden</button>
+		      <button id="Abbruch">Abbrechen</button>
+        </dialog>
         </div>
+        
         <ul>
           <li>Element 2898989898</li>
           <li>Element 289898</li>
@@ -96,4 +101,24 @@
       </div>
     </div>
   </body>
+
+  <script>
+    var startbutton = document.getElementById("start"),
+      dialog = document.getElementById('dialog'),
+      Anmeldung = document.getElementById("Anmeldung"),
+      Abbruch = document.getElementById("Abbruch");
+    startbutton.addEventListener('click', zeigeFenster);
+    Anmeldung.addEventListener('click', schließeFenster);
+    Abbruch.addEventListener('click', schließeFenster);
+  
+    function zeigeFenster() {
+      dialog.showModal();
+    }
+  
+    function schließeFenster() {
+      dialog.close();
+    }
+  
+  </script>
+  
 </html>
