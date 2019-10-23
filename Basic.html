@@ -18,11 +18,15 @@
         <div class="topics">
           <ul>
             <li id="Überschrift">Meine Listen
-              <img id="open-dialog" src="hinzufügen.png" alt="logo">
-              <dialog role="dialog" aria-labelledby="dialog-heading">
-                <button id="close-dialog">Schließen</button>
-                <h2 id="dialog-heading">Info</h2>
-                <p> Dies ist eine zugängliche Dialog-Box, die Sie auch mit der Tastatur benutzen können.</p>
+              <button id="start2"><img id="startbild2" src="hinzufügen.png" alt="hinzufügen"></button>
+              <dialog id="dialog2">
+                <h2>Anmeldung</h2>
+                <form action="#" method="post">
+                  <label for="email2">Bitte geben Sie Ihre Email-Adresse an: </label>
+                  <input id="email2" type="email2"/> 
+                </form>
+                <button id="Anmeldung2">Anmelden</button>
+                <button id="Abbruch2">Abbrechen</button>
               </dialog>
             </li>
             <li id="AktuelleListe">Liste x</li>
@@ -48,6 +52,7 @@
 		      <button id="Anmeldung">Anmelden</button>
 		      <button id="Abbruch">Abbrechen</button>
         </dialog>
+
         </div>
         
         <ul>
@@ -110,6 +115,15 @@
     startbutton.addEventListener('click', zeigeFenster);
     Anmeldung.addEventListener('click', schließeFenster);
     Abbruch.addEventListener('click', schließeFenster);
+
+    
+    var startbutton2 = document.getElementById("start2"),
+      dialog2 = document.getElementById('dialog2'),
+      Anmeldung2 = document.getElementById("Anmeldung2"),
+      Abbruch2 = document.getElementById("Abbruch2");
+    startbutton2.addEventListener('click', zeigeFenster2);
+    Anmeldung2.addEventListener('click', schließeFenster2);
+    Abbruch2.addEventListener('click', schließeFenster2);
   
     function zeigeFenster() {
       dialog.showModal();

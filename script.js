@@ -47,3 +47,19 @@ function zeigeFenster() {
 function schließeFenster() {
 	dialog.close();
 }
+
+var startbutton2 = document.getElementById("start2"),
+	dialog2 = document.getElementById('dialog2'),
+	Anmeldung2 = document.getElementById("Anmeldung2"),
+	Abbruch2 = document.getElementById("Abbruch2");
+startbutton2.addEventListener('click', zeigeFenster2);
+Anmeldung2.addEventListener('click', schließeFenster2);
+Abbruch2.addEventListener('click', schließeFenster2);
+
+function zeigeFenster2() {
+	dialog.showModal();
+}
+
+function schließeFenster2() {
+	dialog.close();
+}
