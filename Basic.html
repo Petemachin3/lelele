@@ -2,7 +2,7 @@
 <html lang="de" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Listen</title>
+    <title class="aktlistname">Listen</title>
     <script language="javascript" type="text/javascript" src="script.js"></script>
     <link rel="stylesheet" href="Style.css">
     <link rel="icon" href="Logo3.png" type="image/x-icon" />
@@ -16,88 +16,81 @@
       </div>
       <div class="side">
         <div class="topics">
-          <ul>
+          <ul id="listlist">
             <li id="Überschrift">Meine Listen
-              <button id="start2"><img id="startbild2" src="hinzufügen.png" alt="hinzufügen"></button>
-              <dialog id="dialog2">
+              <button id="startdialog" class="plusbutton"><img id="dialogplus" src="hinzufügen.png" alt="hinzufügen"></button>
+              <dialog id="dialogbox">
                 <h2>Anmeldung</h2>
-                <form action="#" method="post">
-                  <label for="email2">Bitte geben Sie Ihre Email-Adresse an: </label>
-                  <input id="email2" type="email2"/> 
+                <form action="#" method="post" class="dialogform">
+                  <label for="idsuche">Bitte geben Sie die ID der gesuchten Liste (Beispiel: 5db025be2e4f8f0017e5c5b0) ein: </label>
+                  <input id="idlistinput" type="text" placeholder="5db025be2e4f8f0017e5c5b0"/>
                 </form>
-                <button id="Anmeldung2">Anmelden</button>
-                <button id="Abbruch2">Abbrechen</button>
+                <button id="listidpost">Liste hinzufügen</button>
+                <button id="listinputstop">Abbrechen</button>
               </dialog>
             </li>
-            <li id="AktuelleListe">Liste x</li>
-            <li class="nichtaktuelleListe">Liste y</li>
-            <li class="nichtaktuelleListe">Liste z</li>
+            <!-- <li id="AktuelleListe" class="aktlistname">Liste x</li> -->
+            <!-- <li class="anotherlist">Liste y</li>
+            <li class="anotherlist">Liste z</li> -->
           </ul>
         </div>
       </div>
       <div class="inhalt">
-        <div id="Listenname">
-          <h1>
+        <div id="Listennamediv">
+          <h1 id="Listennameheader" class="aktlistname">
             Listenname X
           </h1>
         </div>
         <div>
-        <button id="start"><img id="startbild" src="hinzufügen.png" alt="hinzufügen"></button>
-	      <dialog id="dialog">
+          <span>
+            <button id="postrequest" class="plusbutton"><img id="startbild" src="hinzufügen.png" alt="hinzufügen"></button>
+          </span>
+          <span>
+            <input id="inputpostitem" type="text" placeholder= "Name des Items eingeben">
+            <!-- <button type="button" id="postrequest">Post</button> -->
+            <button type="button" id="listitems">Create</button>
+          </span>
+	      <!-- <dialog id="dialog">
 		      <h2>Anmeldung</h2>
 		      <form action="#" method="post">
 			      <label for="email">Bitte geben Sie Ihre Email-Adresse an: </label>
-            <input id="email" type="email"/> 
+            <input id="email" type="email"/>
           </form>
 		      <button id="Anmeldung">Anmelden</button>
 		      <button id="Abbruch">Abbrechen</button>
-        </dialog>
-
+        </dialog> -->
         </div>
-        
-        <ul>
-          <li>Element 2898989898</li>
-          <li>Element 289898</li>
-          <li>Element __89898</li>
-          <li>Element 98</li>
-          <li>Element 2898989898</li>
-          <li>Element 289898</li>
-          <li>Element __89898</li>
-          <li>Element 98</li>
-        </ul>
-        <ul>
-          <li>Element 2</li>
-        </ul>
-        <ul>
-          <li>Element 2</li>
-        </ul>
-        <ul>
-          <li>Element 2</li>
-        </ul>
-        <ul>
-          <li>Element 2</li>
-        </ul>
-        <ul>
-          <li>Element 2</li>
-        </ul>
-        <ul>
-          <li>Element 2898989898</li>
-        </ul>
-        <ul>
-          <li>Element 2</li>
-        </ul>
-        <ul>
-          <li>Element 2</li>
-        </ul>
-        <ul>
-          <li>Element 2</li>
-        </ul>
-        <ul>
-          <li>Element 2</li>
-        </ul>
-        <ul>
-            <li>Element 2</li>
-        </ul>
+
+        <table id="createreturn">
+          <!-- <tr>
+            <td>Test</td>
+          </tr> -->
+        </table>
+        <table>
+          <tr><td id="t1">ID der Shopping-Liste:</td><td>5db025be2e4f8f0017e5c5b0</td></tr>
+          <tr><td id="t2">two<input type="checkbox" onclick="checken()" id="subscribeNews6"><label for="subscribeNews6"></label></td></tr>
+          <tr>
+            <td id="t3">Soso</td>
+            <td><button type="button" id="getliste">Get Aufruf</button></td>
+          </tr>
+          <tr>
+            <td><input id="inputdeleteitemid" type="text" placeholder="ID des zu löschenden Items eingeben" width= min-ontent></td>
+            <td><button type="button" id="deleterequest">Delete</button> </td>
+          </tr>
+          <tr>
+            <!-- <td><input id="inputpostitem" type="text" placeholder= "Name des Items eingeben"> </td>
+            <td><button type="button" id="postrequest">Post</button> </td> -->
+          </tr>
+          <!-- <tr>
+            <td><button type="button" name="button" id="outside">Hi there</button></td>
+          </tr> -->
+          <tr>
+            <td><button type="button" onclick="getalllists()">Putten</button> </td>
+          </tr>
+          <tr>
+            <td><button type="button" onclick="createlistbuttonbox()">boxencreate</button> </td>
+          </tr>
+        </table>
       </div>
       <div class="footer">
         <p>© Falterbaum Peter, Kunkel Kilian
@@ -107,32 +100,4 @@
     </div>
   </body>
 
-  <script>
-    var startbutton = document.getElementById("start"),
-      dialog = document.getElementById('dialog'),
-      Anmeldung = document.getElementById("Anmeldung"),
-      Abbruch = document.getElementById("Abbruch");
-    startbutton.addEventListener('click', zeigeFenster);
-    Anmeldung.addEventListener('click', schließeFenster);
-    Abbruch.addEventListener('click', schließeFenster);
-
-    
-    var startbutton2 = document.getElementById("start2"),
-      dialog2 = document.getElementById('dialog2'),
-      Anmeldung2 = document.getElementById("Anmeldung2"),
-      Abbruch2 = document.getElementById("Abbruch2");
-    startbutton2.addEventListener('click', zeigeFenster2);
-    Anmeldung2.addEventListener('click', schließeFenster2);
-    Abbruch2.addEventListener('click', schließeFenster2);
-  
-    function zeigeFenster() {
-      dialog.showModal();
-    }
-  
-    function schließeFenster() {
-      dialog.close();
-    }
-  
-  </script>
-  
 </html>

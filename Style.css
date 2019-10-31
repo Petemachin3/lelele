@@ -61,13 +61,12 @@ html,body{
 .inhalt ul li{
   list-style-type: none;
   border-radius: 5px;
-  width: content-minimum;
+  width: 200px;
   height: content-minimum;
   border: 1px solid black;
   padding: 5px;
   margin-right: 8px;
   margin-top: 5px;
-  display: inline-block;
 }
 
 .footer{
@@ -109,7 +108,7 @@ html,body{
   background-color: antiquewhite;
 }
 
-.nichtaktuelleListe:hover{
+.anotherlist:hover{
   border: 1px solid antiquewhite;
 }
 
@@ -134,6 +133,9 @@ html,body{
   padding-left: 40px;
 }
 
+#createreturn{
+  padding-left: 50px;
+}
 
 #Element_hinzufügen{
 	display: flex;
@@ -142,19 +144,43 @@ html,body{
   height: 70px;
 }
 
-#Listenname{
+#Listennamediv{
 	display: flex;
 	align-items: center;
 	justify-content: center;
   height: 0px;
 }
 
-#Listenname:hover{
+#Listennamediv:hover{
   cursor: default;
 }
 
 .inhalt h1{
   padding-bottom: 170px;
+}
+
+.itemcontent{
+  border: 1px solid black;
+  /* list-style-type: none; */
+  border-radius: 5px;
+  width: 200px;
+  height: content-minimum;
+  border: 1px solid black;
+  padding: 5px;
+  margin-right: 8px;
+  margin-top: 5px;
+}
+
+.löschbutton{
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 100px;
+  height: content-minimum;
+  background-color: yellow;
+}
+
+.dialogform{
+    margin-bottom: 3em;
 }
 
 /*--------------------------------------*/
@@ -231,17 +257,17 @@ html,body{
 
 /*------------------------------------*/
 
-dialog, button {
-	border-radius: 0.5em;
-	margin: 1em;
-}
-
 button {
   background: transparent;
   border: none;
 	font-size: 1em;
 	color: none;
 	cursor: pointer;
+  margin: 0;
+}
+
+#postrequest{
+    margin: 1em;
 }
 
 #startbild{
@@ -250,56 +276,13 @@ button {
   float: right;
 }
 
-#start:hover, #start:focus {
-  transform:scale(1.4);
-}
-
-dialog {
-  margin-left: 25%;
-  margin-right: 25%;
-	display: none;
-	position: fixed;
-	background: white;
-	border: 1px solid grey;
-	border-radius: 0.5em;
-	z-index: 1002;
-	width: 50%;
-	height: auto;
-}
-
-dialog::backdrop {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.5);
-}
-
-dialog[open] {
-	display: block;
-}
-
-/*-------------------------------------*/
-
-.side dialog, button {
-}
-
-.side button {
-  margin: 0;
-  background: transparent;
-  border: none;
-	color: none;
-	cursor: pointer;
-}
-
-.side #startbild2{
+#dialogplus{
   padding-top: 1px;
   height: 15px;
   float: right;
 }
 
-.side #start2:hover, #start2:focus {
+.plusbutton:hover, .plusbutton:focus {
   transform:scale(1.4);
 }
 
@@ -314,15 +297,6 @@ dialog[open] {
 	z-index: 1002;
 	width: 50%;
 	height: auto;
-}
-
-.side dialog::backdrop {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.5);
 }
 
 .side dialog[open] {

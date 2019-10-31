@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Listen</title>
+    <script language="javascript" type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="Style.css">
+    <link rel="icon" href="Logo3.png" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="grid">
+      <div class="header">
+          <div id="Banner">
+            <a href="https://www.wikipedia.org/"><img src="Logo3.png" width="120px" alt="logo"></a>
+          </div>
+      </div>
+      <div class="side">
+        <div class="topics">
+          <ul>
+            <li id="Überschrift">Meine Listen
+              <button id="start2"><img id="startbild2" src="hinzufügen.png" alt="hinzufügen"></button>
+              <dialog id="dialog2">
+                <h2>Anmeldung</h2>
+                <form action="#" method="post">
+                  <label for="email2">Bitte geben Sie Ihre Email-Adresse an: </label>
+                  <input id="email2" type="email2"/> 
+                </form>
+                <button id="Anmeldung2">Anmelden</button>
+                <button id="Abbruch2">Abbrechen</button>
+              </dialog>
+            </li>
+            <li id="AktuelleListe">Liste x</li>
+            <li class="nichtaktuelleListe">Liste y</li>
+            <li class="nichtaktuelleListe">Liste z</li>
+          </ul>
+        </div>
+      </div>
+      <div class="inhalt">
+        <div id="Listenname">
+          <h1>
+            Listenname X
+          </h1>
+        </div>
+        <div>
+        <button id="start"><img id="startbild" src="hinzufügen.png" alt="hinzufügen"></button>
+	      <dialog id="dialog">
+		      <h2>Anmeldung</h2>
+		      <form action="#" method="post">
+			      <label for="email">Bitte geben Sie Ihre Email-Adresse an: </label>
+            <input id="email" type="email"/> 
+          </form>
+		      <button id="Anmeldung">Anmelden</button>
+		      <button id="Abbruch">Abbrechen</button>
+        </dialog>
+
+        </div>
+        
+        <ul>
+          <li>Element 2898989898</li>
+          <li>Element 289898</li>
+          <li>Element __89898</li>
+          <li>Element 98</li>
+          <li>Element 2898989898</li>
+          <li>Element 289898</li>
+          <li>Element __89898</li>
+          <li>Element 98</li>
+        </ul>
+        <ul>
+          <li>Element 2</li>
+        </ul>
+        <ul>
+          <li>Element 2</li>
+        </ul>
+        <ul>
+          <li>Element 2</li>
+        </ul>
+        <ul>
+          <li>Element 2</li>
+        </ul>
+        <ul>
+          <li>Element 2</li>
+        </ul>
+        <ul>
+          <li>Element 2898989898</li>
+        </ul>
+        <ul>
+          <li>Element 2</li>
+        </ul>
+        <ul>
+          <li>Element 2</li>
+        </ul>
+        <ul>
+          <li>Element 2</li>
+        </ul>
+        <ul>
+          <li>Element 2</li>
+        </ul>
+        <ul>
+            <li>Element 2</li>
+        </ul>
+      </div>
+      <div class="footer">
+        <p>© Falterbaum Peter, Kunkel Kilian
+          <a href="https://www.wikipedia.org/"><img class="footerimage" src="Logo3.png" alt="logo"></a>
+        </p>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    var startbutton = document.getElementById("start"),
+      dialog = document.getElementById('dialog'),
+      Anmeldung = document.getElementById("Anmeldung"),
+      Abbruch = document.getElementById("Abbruch");
+    startbutton.addEventListener('click', zeigeFenster);
+    Anmeldung.addEventListener('click', schließeFenster);
+    Abbruch.addEventListener('click', schließeFenster);
+
+    
+    var startbutton2 = document.getElementById("start2"),
+      dialog2 = document.getElementById('dialog2'),
+      Anmeldung2 = document.getElementById("Anmeldung2"),
+      Abbruch2 = document.getElementById("Abbruch2");
+    startbutton2.addEventListener('click', zeigeFenster2);
+    Anmeldung2.addEventListener('click', schließeFenster2);
+    Abbruch2.addEventListener('click', schließeFenster2);
+  
+    function zeigeFenster() {
+      dialog.showModal();
+    }
+  
+    function schließeFenster() {
+      dialog.close();
+    }
+  
+  </script>
+  
+</html>
