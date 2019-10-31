@@ -66,11 +66,11 @@ function testpardel(itemid){
 
 function testparpos(){
   var inputpostitemdata = document.getElementById("inputpostitem").value;
-  // document.getElementById("inputpostitem").value = "Name des Items eingeben";
   inputpostitemdata = {"name": inputpostitemdata};
   console.log(typeof(inputpostitemdata));
   posurl = url + "/items";
   postdata(posurl, inputpostitemdata, "POST");
+  document.getElementById("inputpostitem").value = "";
 }
 
 function testparput(itemid){
@@ -116,12 +116,12 @@ async function allitemget(jsoncontent){ // jsoncontent ist das Objekt einer List
 }
 
 function allitemsdel(){
-  var elements = document.getElementsByClassName("itemrows");
-      while(elements.length > 0){
-          elements[0].parentNode.removeChild(elements[0]);
-      }
-  // var node= document.getElementById("createreturn");
-  // node.querySelectorAll('*').forEach(n => n.remove());
+  // var elements = document.getElementsByClassName("itemrows");
+  //     while(elements.length > 0){
+  //         elements[0].parentNode.removeChild(elements[0]);
+      // }
+  var node= document.getElementById("createreturn");
+  node.querySelectorAll('*').forEach(n => n.remove());
 }
 
 function generischEventlistenercheck(itemid){
@@ -203,7 +203,8 @@ function generischEventlistenerakt(listid, jsoncontent){
   var deletebox = document.getElementById("li" + listid);
   deletebox.addEventListener("click", function(){
     allitemsdel();
-    urlgenerator(jsoncontent._id)
+    urlgenerator(jsoncontent._id);
+    document.getElementById("inputpostitem").value = "";
     // console.log(jsoncontent);
     // allitemget(jsoncontent);
     // console.log(jsoncontent._id);
@@ -230,24 +231,9 @@ window.onload = function() {
   urlshort = 'http://shopping-lists-api.herokuapp.com/api/v1/lists/';
   // urlgenerator('5db025be2e4f8f0017e5c5b0')
   getalllists();
-  // listid = '5db025be2e4f8f0017e5c5b0';
-	// url = urlshort + listid;
-	// apiabfrage();
-  var deleterequest = document.getElementById("deleterequest");
-  deleterequest.addEventListener("click", testpardel);
 
   var postrequest = document.getElementById("postrequest");
   postrequest.addEventListener("click", testparpos);
-
-  var getliste = document.getElementById("getliste");
-  getliste.addEventListener("click", apiabfrage);
-
-  var inputdelenter = document.getElementById("inputdeleteitemid");
-  inputdelenter.addEventListener("keyup", function(event) {
-    if (event.keyCode == 13) {
-      testpardel();
-    }
-  });
 
   var inputposenter = document.getElementById("inputpostitem");
   inputposenter.addEventListener("keyup", function(event) {
@@ -257,9 +243,6 @@ window.onload = function() {
   });
 
   checkBox = document.getElementById("subscribeNews6");
-
-	var createelement = document.getElementById("listitems");
-	createelement.addEventListener("click", allitemget);
 
   var listidpost = document.getElementById("listidpost");
   listidpost.addEventListener("click", setlistid)
