@@ -249,8 +249,8 @@ window.onload = function() {
 
   idnrdict = {};
 
-  var listennameheader = document.getElementById("Listennameheader");
-  listennameheader.addEventListener("click", function(){
+  var banner = document.getElementById("Banner");
+  banner.addEventListener("click", function(){
     allitemsdel();
     var defaultcontent = document.createElement('td')
     defaultcontent.textContent = "Es wurde noch keine der Listen geladen.";

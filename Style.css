@@ -129,7 +129,7 @@ html,body{
   margin-left: 5em;
 }
 
-#Banner a{
+#Banner button{
   padding-left: 40px;
 }
 
@@ -264,6 +264,7 @@ button {
 	color: none;
 	cursor: pointer;
   margin: 0;
+  outline-style: none;
 }
 
 #postrequest{
