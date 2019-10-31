@@ -290,9 +290,13 @@ window.onload = function() {
   var banner = document.getElementById("Banner");
   banner.addEventListener("click", function(){
     allitemsdel();
-    var defaultcontent = document.createElement('td')
+    var defaultcontent = document.createElement('td');
     defaultcontent.textContent = "Es wurde noch keine der Listen geladen.";
     document.getElementById("createreturn").appendChild(document.createElement('tr').appendChild(defaultcontent));
+    var aktlistname = document.getElementsByClassName("aktlistname");
+    for (var i = 0; i < aktlistname.length; i++){
+      aktlistname[i].textContent = "Listen";
+    }
   });
 
   var listinputstop = document.getElementById("listinputstop");
