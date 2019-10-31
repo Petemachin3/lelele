@@ -1,5 +1,5 @@
 html,body{
-  background-color: lightgreen;
+  background-color: #ff9c1c;
   width: 100%;
   height: 100%;
   margin: 0;
@@ -23,7 +23,7 @@ html,body{
   grid-area: header;
   padding: 10px 20px 10px 0;
   font-size: 9pt;
-  background-color: lightgreen;
+  background-color: #ffa500;
 }
 
 .header div{
@@ -72,7 +72,7 @@ html,body{
 .footer{
   grid-area: footer;
   font-size: 70%;
-  background-color: lightgreen;
+  background-color: #ff9c1c;
   margin-left: 1%;
 }
 
