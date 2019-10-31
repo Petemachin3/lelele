@@ -1,9 +1,13 @@
 // Functions
 function urlgenerator(newlistid){
+  setboxcolor();
   listid = newlistid;
   url = urlshort + newlistid;
   allitemsdel();
   apiabfrage();
+}
+
+function setboxcolor(){
 }
 
 function modifyText() {
@@ -194,20 +198,50 @@ function alllistsbox(allitemsjson){
       console.log(newbox.id)
       newbox.className = "anotherlist";
       newbox.textContent = allitemsjson[i].name;
+      newbox.style.backgroundColor = "lightgreen";
     listlist.appendChild(newbox);
     generischEventlistenerakt(allitemsjson[i]._id, allitemsjson[i]);
   }
 }
 
+async function createnewlist(newlistname = {}){
+  var getallurl = urlshort.slice(0, urlshort.length - 1);
+  console.log(getallurl);
+  const response = await fetch(getallurl, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'a24fb077b67a5dedc043ac28afbea9c6',
+    },
+    body: JSON.stringify(newlistname),
+  });
+  var getalllistsjson = await response.json();
+  console.log(getalllistsjson);
+  closedialog();
+  deletealllistboxes();
+  getalllists();
+}
+
+function deletealllistboxes(){
+  // var elements = document.getElementsByClassName("itemrows");
+  //     while(elements.length > 0){
+  //         elements[0].parentNode.removeChild(elements[0]);
+      // }
+  var node= document.getElementById("listlist");
+  node.querySelectorAll('*').forEach(n => n.remove());
+}
+
 function generischEventlistenerakt(listid, jsoncontent){
-  var deletebox = document.getElementById("li" + listid);
-  deletebox.addEventListener("click", function(){
+  var listbox = document.getElementById("li" + listid);
+  listbox.addEventListener("click", function(){
     allitemsdel();
     urlgenerator(jsoncontent._id);
     document.getElementById("inputpostitem").value = "";
-    // console.log(jsoncontent);
-    // allitemget(jsoncontent);
-    // console.log(jsoncontent._id);
+    var def = document.getElementsByClassName("anotherlist");
+    for (var i = 0; i < def.length; i++) {
+      def[i].style.backgroundColor = "lightgreen";
+    }
+    document.getElementById("li" + listid).style.backgroundColor = "lightblue";
   });
 }
 
@@ -229,7 +263,7 @@ function setlistid(){
 
 window.onload = function() {
   urlshort = 'http://shopping-lists-api.herokuapp.com/api/v1/lists/';
-  // urlgenerator('5db025be2e4f8f0017e5c5b0')
+  urlgenerator('5db025be2e4f8f0017e5c5b0')
   getalllists();
 
   var postrequest = document.getElementById("postrequest");
@@ -245,7 +279,11 @@ window.onload = function() {
   checkBox = document.getElementById("subscribeNews6");
 
   var listidpost = document.getElementById("listidpost");
-  listidpost.addEventListener("click", setlistid)
+  listidpost.addEventListener("click", function(){
+    var newname = document.getElementById("idlistinput").value;
+    var newlistname = {"name": newname};
+    createnewlist(newlistname);
+  })
 
   idnrdict = {};
 

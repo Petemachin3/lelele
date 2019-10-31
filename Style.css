@@ -45,6 +45,10 @@ html,body{
   width: auto;
 }
 
+#listcreate{
+  /* margin-bottom: 10px; */
+}
+
 .inhalt{
   padding-top: 20px;
   padding-bottom: 20px;
@@ -85,7 +89,7 @@ html,body{
 .footer p{
   margin-right: 20px;
   text-align: right;
-}
+  }
 
 .topics ul{
   padding-left: 0;
@@ -99,6 +103,14 @@ html,body{
   border-radius: 5px;
   padding: 7px;
 }
+/*
+.topics input{
+  margin: 0.5em;
+  list-style-type: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 7px;
+} */
 
 #Überschrift{
   border-bottom: 3px solid black;
@@ -110,6 +122,10 @@ html,body{
 
 .anotherlist:hover{
   border: 1px solid antiquewhite;
+}
+
+.anotherlist:focus{
+  background-color: yellow;
 }
 
 #Hinzufügen{
@@ -154,6 +170,11 @@ html,body{
 #Listennamediv:hover{
   cursor: default;
 }
+
+/* li button{
+  width: 100%;
+  text-align: left;
+} */
 
 .inhalt h1{
   padding-bottom: 170px;
