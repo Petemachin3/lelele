@@ -249,7 +249,13 @@ window.onload = function() {
 
   idnrdict = {};
 
-
+  var listennameheader = document.getElementById("Listennameheader");
+  listennameheader.addEventListener("click", function(){
+    allitemsdel();
+    var defaultcontent = document.createElement('td')
+    defaultcontent.textContent = "Es wurde noch keine der Listen geladen.";
+    document.getElementById("createreturn").appendChild(document.createElement('tr').appendChild(defaultcontent));
+  });
 
   var listinputstop = document.getElementById("listinputstop");
   listinputstop.addEventListener("click", closedialog);
