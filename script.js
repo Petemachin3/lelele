@@ -1,23 +1,16 @@
 // Functions
 function urlgenerator(newlistid){
-  setboxcolor();
+  // setboxcolor();
   listid = newlistid;
   url = urlshort + newlistid;
-  allitemsdel();
+  // allitemsdel();
+  delitemsbyparent("createreturn");
   apiabfrage();
 }
 
-function setboxcolor(){
-}
+// function setboxcolor(){
+// }
 
-function modifyText() {
-  var t2 = document.getElementById("t2");
-  if (t2.firstChild.nodeValue == "three") {
-    t2.firstChild.nodeValue = "two";
-  } else {
-    t2.firstChild.nodeValue = typeof(zahl);
-  }
-}
 
 async function apiabfrage() {
   const response = await fetch(url);
@@ -40,20 +33,23 @@ async function postdata(url = '', data = {}, requesttype = ''){
     body: JSON.stringify(data) // body data type must match "Content-Type" header
   });
   getJson = await response.json();
-	console.log(JSON.stringify(getJson));
+	// console.log(JSON.stringify(getJson));
 
-  allitemsdel();
-  allitemget(getJson);
-}
-
-
-function printing(content){
-  t3.firstChild.nodeValue = content;
+  if (requesttype == "DELETE") {
+    delitemsbyparent("createreturn");
+    apiabfrage();
+    // getalllists();
+  }
+  else {
+    // allitemsdel();
+    delitemsbyparent("createreturn");
+    allitemget(getJson);
+  }
 }
 
 async function getalllists(){
   var getallurl = urlshort.slice(0, urlshort.length - 1);
-  console.log(getallurl);
+  // console.log(getallurl);
   const response = await fetch(getallurl, {method: "GET", headers: {'Content-Type': 'application/json', 'Authorization': 'a24fb077b67a5dedc043ac28afbea9c6'}});
   getalllistsjson = await response.json();
   // console.log(getalllistsjson[0]._id);
@@ -61,9 +57,6 @@ async function getalllists(){
 }
 
 function testpardel(itemid){
-  // var deleteitemid = document.getElementById("inputdeleteitemid").value;
-  // document.getElementById("inputdeleteitemid").value = "ID des zu löschenden Items eingeben";
-  // var itemid = "/" + inputdeleteitemid;
   delurl = url + "/items/" + itemid;
   postdata(delurl, {}, "DELETE");
 }
@@ -71,7 +64,7 @@ function testpardel(itemid){
 function testparpos(){
   var inputpostitemdata = document.getElementById("inputpostitem").value;
   inputpostitemdata = {"name": inputpostitemdata};
-  console.log(typeof(inputpostitemdata));
+  // console.log(typeof(inputpostitemdata));
   posurl = url + "/items";
   postdata(posurl, inputpostitemdata, "POST");
   document.getElementById("inputpostitem").value = "";
@@ -81,7 +74,7 @@ function testparput(itemid){
   var itemnr = idnrdict[itemid];
   var putitemdata;
 	getbought = getJson.items[itemnr].bought;
-	console.log(typeof(getbought));
+	// console.log(typeof(getbought));
 	if (getbought) {
 		putitemdata = {"bought": "false"};
 	}
@@ -99,18 +92,32 @@ function bridgecreateaufruf(itemnr, jsoncontent){
 	var itembought = jsoncontent.items[itemnr].bought;
 	var itemid = jsoncontent.items[itemnr]._id;
   idnrdict[itemid] = itemnr;
-	console.log(idnrdict[itemid]);
+	// console.log(idnrdict[itemid]);
 	// .items[itemnr].name;
 	createaufruf(itembought, itemname, itemid, itemnr);
 }
 
 
-async function allitemget(jsoncontent){ // jsoncontent ist das Objekt einer Liste
-  // console.log("Zeile 105");
-  // console.log(jsoncontent);
+async function allitemget(jsoncontent){
+  // *************** vorherigen Header löschen, falls vorhanden
+  delitemsbyparent("listheader");
+  // *************** Infos über die Liste als "Header" im body erstellen (inkl Löschbutton der Liste)
+  var listheader = document.getElementById("listheader");
+    var spanlistid = document.createElement('span');
+      spanlistid.textContent = "Listid: " + listid;
+      spanlistid.id = "si" + listid; // si --> span id (list)
+    var spanlistdel = document.createElement('span');
+      spanlistdel.id = "sd" + listid; // sd --> span delete
+      var butlistdel = document.createElement('button');
+        butlistdel.textContent = "Liste löschen";
+        butlistdel.id = "bd" + listid; // bd --> button delete
+        butlistdel.className = "buttontext";
+      spanlistdel.appendChild(butlistdel);
+    listheader.appendChild(spanlistid);
+    listheader.appendChild(spanlistdel)
+  generischEventlistenerlistdel(listid);
+
 	for (var i = 0; i < jsoncontent.items.length; i++){
-    // console.log("Zeile 108")
-    // console.log(jsoncontent.items.length)
 		bridgecreateaufruf(i.toString(), jsoncontent);
 	}
   var aktlistname = document.getElementsByClassName("aktlistname");
@@ -119,12 +126,36 @@ async function allitemget(jsoncontent){ // jsoncontent ist das Objekt einer List
   }
 }
 
+function generischEventlistenerlistdel(listid){
+	var listdeletebox = document.getElementById("bd" + listid);
+	listdeletebox.addEventListener("click", async function(){
+			console.log(url);
+      delitemsbyparent("listlist");
+      postdata(url, {}, "DELETE");
+      setstartpage();
+      await Sleep(400); // Timer, da löschen auf dem Server einen Moment dauert
+      getalllists();
+	});
+}
+
+function Sleep(milliseconds) {
+   return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
 function allitemsdel(){
-  // var elements = document.getElementsByClassName("itemrows");
-  //     while(elements.length > 0){
-  //         elements[0].parentNode.removeChild(elements[0]);
-      // }
   var node= document.getElementById("createreturn");
+  node.querySelectorAll('*').forEach(n => n.remove());
+}
+
+// function deletealllistboxes(){
+//   console.log("Listboxes werden gelöscht")
+//   var node= document.getElementById("listlist");
+//   node.querySelectorAll('*').forEach(n => n.remove());
+// }
+
+function delitemsbyparent(parentid = ""){
+  // console.log("Listboxes werden gelöscht");
+  var node= document.getElementById(parentid);
   node.querySelectorAll('*').forEach(n => n.remove());
 }
 
@@ -146,12 +177,13 @@ function generischEventlistenerdel(itemid){
 }
 
 function createaufruf(bought, itemname = "", itemid, itemnr){
-  var list = document.querySelector('#createreturn');
-  newrow = document.createElement('tr');
+  var tabitems = document.getElementById("createreturn");
+// ********* alle Items einer Liste im html erstellen (inkl buttons)
+  var newrow = document.createElement('tr');
     newrow.id = "row" + itemid;
     newrow.className = "itemrows";
-		newcell1 = document.createElement('td');
-			newbutput = document.createElement('input');
+		var newcell1 = document.createElement('td');
+			var newbutput = document.createElement('input');
 				newbutput.type = 'checkbox';
 				newbutput.id = "ch" + itemid;
 				newbutput.name = itemnr;
@@ -162,7 +194,7 @@ function createaufruf(bought, itemname = "", itemid, itemnr){
 				else {
 					newbutput.checked = false;
 				}
-				newbutputlab = document.createElement('label');
+				var newbutputlab = document.createElement('label');
 					newbutputlab.for = 'subscribeNews10';
 				newbutput.appendChild(newbutputlab);
 			newcell1.appendChild(newbutput);
@@ -178,7 +210,7 @@ function createaufruf(bought, itemname = "", itemid, itemnr){
   			newbutdel.className = "löschbutton";
 			newcell3.appendChild(newbutdel)
 		newrow.appendChild(newcell3);
-	list.appendChild(newrow);
+	tabitems.appendChild(newrow);
 	generischEventlistenercheck(itemid);
   generischEventlistenerdel(itemid);
 }
@@ -191,11 +223,11 @@ function createaufruf(bought, itemname = "", itemid, itemnr){
 
 function alllistsbox(allitemsjson){
   for (var i = 0; i < allitemsjson.length; i++) {
-    var listlist = document.querySelector('#listlist');
+    var listlist = document.getElementById("listlist");
     // var listid = "abc";
     newbox = document.createElement('li');
       newbox.id = "li" + allitemsjson[i]._id;
-      console.log(newbox.id)
+      // console.log(newbox.id)
       newbox.className = "anotherlist";
       newbox.textContent = allitemsjson[i].name;
       newbox.style.backgroundColor = "lightgreen";
@@ -221,19 +253,15 @@ async function createnewlist(){
   });
   var getalllistsjson = await response.json();
   closedialog();
-  deletealllistboxes();
+  delitemsbyparent("listlist");
   getalllists();
-}
-
-function deletealllistboxes(){
-  var node= document.getElementById("listlist");
-  node.querySelectorAll('*').forEach(n => n.remove());
 }
 
 function generischEventlistenerakt(listid, jsoncontent){
   var listbox = document.getElementById("li" + listid);
   listbox.addEventListener("click", function(){
-    allitemsdel();
+    // allitemsdel();
+    delitemsbyparent("createreturn");
     urlgenerator(jsoncontent._id);
     document.getElementById("inputpostitem").value = "";
     var def = document.getElementsByClassName("anotherlist");
@@ -245,6 +273,7 @@ function generischEventlistenerakt(listid, jsoncontent){
 }
 
 function opendialog(){
+  document.getElementById("idlistinput").value = "";
   dialog.showModal();
 }
 
@@ -252,17 +281,35 @@ function closedialog(){
   dialog.close();
 }
 
-function setlistid(){
-  var listid = document.getElementById("idlistinput").value;
-  urlgenerator(listid);
-  closedialog();
+// function setlistid(){
+//   var listid = document.getElementById("idlistinput").value;
+//   urlgenerator(listid);
+//   closedialog();
+// }
+
+function setstartpage(){
+  // allitemsdel();
+  delitemsbyparent("createreturn");
+  var defaultcontent = document.createElement('td');
+  defaultcontent.textContent = "Es wurde noch keine der Listen geladen.";
+  document.getElementById("createreturn").appendChild(document.createElement('tr').appendChild(defaultcontent));
+  var aktlistname = document.getElementsByClassName("aktlistname");
+  for (var i = 0; i < aktlistname.length; i++){
+    aktlistname[i].textContent = "Listen";
+  }
+  var def = document.getElementsByClassName("anotherlist");
+  for (var i = 0; i < def.length; i++) {
+    def[i].style.backgroundColor = "lightgreen";
+  };
+
 }
+
 
 // Onload bzgl EventListener
 
 window.onload = function() {
   urlshort = 'http://shopping-lists-api.herokuapp.com/api/v1/lists/';
-  urlgenerator('5dbc1caded629e00171e28e2')
+  // urlgenerator('5dbc3fd7ed629e00171e29ac');
   getalllists();
 
   var postrequest = document.getElementById("postrequest");
@@ -285,20 +332,7 @@ window.onload = function() {
   idnrdict = {};
 
   var banner = document.getElementById("Banner");
-  banner.addEventListener("click", function(){
-    allitemsdel();
-    var defaultcontent = document.createElement('td');
-    defaultcontent.textContent = "Es wurde noch keine der Listen geladen.";
-    document.getElementById("createreturn").appendChild(document.createElement('tr').appendChild(defaultcontent));
-    var aktlistname = document.getElementsByClassName("aktlistname");
-    for (var i = 0; i < aktlistname.length; i++){
-      aktlistname[i].textContent = "Listen";
-    }
-    var def = document.getElementsByClassName("anotherlist");
-    for (var i = 0; i < def.length; i++) {
-      def[i].style.backgroundColor = "lightgreen";
-    }
-  });
+  banner.addEventListener("click", setstartpage)
 
   var listinputstop = document.getElementById("listinputstop");
   listinputstop.addEventListener("click", closedialog);
@@ -316,6 +350,12 @@ window.onload = function() {
   idlistinput.addEventListener("keydown", function(event) {
     if (event.keyCode == 13) {
       createnewlist();
+    }
+  });
+
+  window.addEventListener("keydown", function(event) {
+    if (event.keyCode == 32) {
+      opendialog();
     }
   });
 

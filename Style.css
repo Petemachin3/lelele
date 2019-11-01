@@ -233,10 +233,6 @@ html,body{
 	display: block;
 }
 
-.dialogbox button{
-  border:
-}
-
 @media (min-width: 20em) {
 	.topics dialog {
     overflow: visible;
@@ -303,6 +299,27 @@ button {
   padding-top: 1px;
   height: 15px;
   float: right;
+}
+
+#listheader{
+  float: right;
+  margin-right: 3em;
+}
+
+#listheader span{
+  margin: 1em;
+}
+
+.buttontext{
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 5px;
+  margin-right: 8px;
+  margin-top: 5px;
+}
+
+.buttontext:hover{
+  border: 1px solid antiquewhite;
 }
 
 .plusbutton:hover, .plusbutton:focus {
