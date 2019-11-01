@@ -297,6 +297,10 @@ window.onload = function() {
     for (var i = 0; i < aktlistname.length; i++){
       aktlistname[i].textContent = "Listen";
     }
+    var def = document.getElementsByClassName("anotherlist");
+    for (var i = 0; i < def.length; i++) {
+      def[i].style.backgroundColor = "lightgreen";
+    }
   });
 
   var listinputstop = document.getElementById("listinputstop");
@@ -311,6 +315,4 @@ window.onload = function() {
   idlistinput.addEventListener("click", function(){
      idlistinput.value = "";
   });
-
-
 }
