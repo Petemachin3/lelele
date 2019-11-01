@@ -279,8 +279,6 @@ window.onload = function() {
 
   var listidpost = document.getElementById("listidpost");
   listidpost.addEventListener("click", function(){
-    // var newname = document.getElementById("idlistinput").value;
-    // var newlistname = {"name": newname};
     createnewlist();
   })
 
@@ -315,9 +313,8 @@ window.onload = function() {
      idlistinput.value = "";
   });
 
-  // var idlistinput = document.getElementById("idlistinput");
   idlistinput.addEventListener("keydown", function(event) {
-    if (event.keyCode == 37) {
+    if (event.keyCode == 13) {
       createnewlist();
     }
   });

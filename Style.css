@@ -200,10 +200,6 @@ html,body{
   background-color: yellow;
 }
 
-.dialogform{
-    margin-bottom: 3em;
-}
-
 /*--------------------------------------*/
 
 .topics #open-dialog {
@@ -237,10 +233,14 @@ html,body{
 	display: block;
 }
 
+.dialogbox button{
+  border:
+}
+
 @media (min-width: 20em) {
 	.topics dialog {
     overflow: visible;
-    position: fixed;
+    position: relative;
     margin-left: calc(10%-500px);
     margin-right: calc(10%+500px);
     padding-left: 2em;
@@ -248,10 +248,11 @@ html,body{
     width: 30%;
     min-width: 300px;
   }
+
 }
 
 .topics dialog::backdrop, #backdrop {
-	position: fixed;
+	/* position: fixed; */
 	top: 0;
 	left: 0;
 	right: 0;
