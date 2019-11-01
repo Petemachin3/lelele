@@ -1,18 +1,17 @@
 // Functions
 function urlgenerator(newlistid){
-  // setboxcolor();
   listid = newlistid;
-  url = urlshort + newlistid;
+  var url = urlshort + newlistid;
   // allitemsdel();
   delitemsbyparent("createreturn");
-  apiabfrage();
+  apiabfrage(url);
 }
 
 // function setboxcolor(){
 // }
 
 
-async function apiabfrage() {
+async function apiabfrage(url) {
   const response = await fetch(url);
   getJson = await response.json();
   c = JSON.stringify(getJson);
@@ -37,28 +36,29 @@ async function postdata(url = '', data = {}, requesttype = ''){
 
   if (requesttype == "DELETE") {
     delitemsbyparent("createreturn");
-    apiabfrage();
-    // getalllists();
   }
   else {
-    // allitemsdel();
     delitemsbyparent("createreturn");
     allitemget(getJson);
   }
 }
 
-async function getalllists(){
+async function getalllists(listdel = false){
   var getallurl = urlshort.slice(0, urlshort.length - 1);
   // console.log(getallurl);
   const response = await fetch(getallurl, {method: "GET", headers: {'Content-Type': 'application/json', 'Authorization': 'a24fb077b67a5dedc043ac28afbea9c6'}});
   getalllistsjson = await response.json();
   // console.log(getalllistsjson[0]._id);
   alllistsbox(getalllistsjson);
-  document.getElementById("li" + listid).style.backgroundColor = "lightblue";
+  console.log(listid);
+  if (!listdel) {
+    document.getElementById("li" + listid).style.backgroundColor = "lightblue";
+  }
+
 }
 
 function testpardel(itemid){
-  delurl = url + "/items/" + itemid;
+  delurl = urlshort + listid + "/items/" + itemid;
   postdata(delurl, {}, "DELETE");
 }
 
@@ -66,7 +66,7 @@ function testparpos(){
   var inputpostitemdata = document.getElementById("inputpostitem").value;
   inputpostitemdata = {"name": inputpostitemdata};
   // console.log(typeof(inputpostitemdata));
-  posurl = url + "/items";
+  posurl = urlshort + listid + "/items";
   postdata(posurl, inputpostitemdata, "POST");
   document.getElementById("inputpostitem").value = "";
 }
@@ -82,19 +82,15 @@ function testparput(itemid){
 	else {
 		putitemdata = {"bought": "true"};
 	}
-  var puturl = url + "/items/" + itemid
+  var puturl = urlshort + listid + "/items/" + itemid
   postdata(puturl, putitemdata, "PUT");
 }
 
 function bridgecreateaufruf(itemnr, jsoncontent){
 	var itemname = jsoncontent.items[itemnr].name;
-	// console.log(getJson.items.length);
-	// console.log(itemnr);
 	var itembought = jsoncontent.items[itemnr].bought;
 	var itemid = jsoncontent.items[itemnr]._id;
   idnrdict[itemid] = itemnr;
-	// console.log(idnrdict[itemid]);
-	// .items[itemnr].name;
 	createaufruf(itembought, itemname, itemid, itemnr);
 }
 
@@ -134,23 +130,24 @@ async function allitemget(jsoncontent){
 function generischEventlistenerlistdel(listid){
 	var listdeletebox = document.getElementById("bd" + listid);
 	listdeletebox.addEventListener("click", async function(){
-			console.log(url);
+
+      postdata(urlshort + listid, {}, "DELETE");
+      console.log(listid);
       delitemsbyparent("listlist");
-      postdata(url, {}, "DELETE");
       setstartpage();
-      await Sleep(400); // Timer, da löschen auf dem Server einen Moment dauert
-      getalllists();
+      await Sleep(300); // Timer, da löschen auf dem Server einen Moment dauert
+      getalllists(true);
 	});
 }
 
 function Sleep(milliseconds) {
    return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
-
-function allitemsdel(){
-  var node= document.getElementById("createreturn");
-  node.querySelectorAll('*').forEach(n => n.remove());
-}
+//
+// function allitemsdel(){
+//   var node= document.getElementById("createreturn");
+//   node.querySelectorAll('*').forEach(n => n.remove());
+// }
 
 // function deletealllistboxes(){
 //   console.log("Listboxes werden gelöscht")
@@ -297,6 +294,7 @@ function closedialog(){
 function setstartpage(){
   // allitemsdel();
   delitemsbyparent("createreturn");
+  delitemsbyparent("listheader");
   var defaultcontent = document.createElement('td');
   defaultcontent.textContent = "Es wurde noch keine der Listen geladen.";
   document.getElementById("createreturn").appendChild(document.createElement('tr').appendChild(defaultcontent));
@@ -308,7 +306,18 @@ function setstartpage(){
   for (var i = 0; i < def.length; i++) {
     def[i].style.backgroundColor = "lightgreen";
   };
+}
 
+async function getlistbyid(){
+  setstartpage();
+  var inputlistbyid = document.getElementById("inputlistbyid").value;
+  console.log(inputlistbyid);
+  urlgenerator(inputlistbyid);
+  // getalllists();
+  // urlgenerator('5dbcbeab8b9c590017a97a5e');
+  // var url = urlshort + listid;
+  // delitemsbyparent("createreturn");
+  // apiabfrage(url);
 }
 //
 // function delcach(){
@@ -372,5 +381,8 @@ window.onload = function() {
   //     opendialog();
   //   }
   // });
+
+  var butlistbyid = document.getElementById("butlistbyid");
+  butlistbyid.addEventListener("click", getlistbyid);
 
 }
