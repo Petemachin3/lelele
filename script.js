@@ -54,6 +54,7 @@ async function getalllists(){
   getalllistsjson = await response.json();
   // console.log(getalllistsjson[0]._id);
   alllistsbox(getalllistsjson);
+  document.getElementById("li" + listid).style.backgroundColor = "lightblue";
 }
 
 function testpardel(itemid){
@@ -237,12 +238,12 @@ function alllistsbox(allitemsjson){
 }
 
 async function createnewlist(){
-  console.log(newlistname);
+  // console.log(newlistname);
   var getallurl = urlshort.slice(0, urlshort.length - 1);
-  console.log(getallurl);
+  // console.log(getallurl);
   var newname = document.getElementById("idlistinput").value;
   var newlistname = {"name": newname};
-  console.log(newlistname);
+  // console.log(newlistname);
   const response = await fetch(getallurl, {
     method: "POST",
     headers: {
@@ -252,6 +253,8 @@ async function createnewlist(){
     body: JSON.stringify(newlistname),
   });
   var getalllistsjson = await response.json();
+  // console.log(getalllistsjson._id);
+  urlgenerator(getalllistsjson._id);
   closedialog();
   delitemsbyparent("listlist");
   getalllists();
@@ -303,13 +306,17 @@ function setstartpage(){
   };
 
 }
-
+//
+// function delcach(){
+//   localStorage.clear();
+//   console.log("cache geleert");
+// }
 
 // Onload bzgl EventListener
 
 window.onload = function() {
   urlshort = 'http://shopping-lists-api.herokuapp.com/api/v1/lists/';
-  // urlgenerator('5dbc3fd7ed629e00171e29ac');
+  urlgenerator('5dbc1caded629e00171e28e2');
   getalllists();
 
   var postrequest = document.getElementById("postrequest");
@@ -353,10 +360,13 @@ window.onload = function() {
     }
   });
 
-  window.addEventListener("keydown", function(event) {
-    if (event.keyCode == 32) {
-      opendialog();
-    }
-  });
+  // var delcachebutton = document.getElementById("delcache")
+  // delcachebutton.addEventListener("click", delcach);
+
+  // window.addEventListener("keydown", function(event) {
+  //   if (event.keyCode == 32) {
+  //     opendialog();
+  //   }
+  // });
 
 }
