@@ -109,8 +109,8 @@ async function allitemget(jsoncontent){ // jsoncontent ist das Objekt einer List
   // console.log("Zeile 105");
   // console.log(jsoncontent);
 	for (var i = 0; i < jsoncontent.items.length; i++){
-    console.log("Zeile 108")
-    console.log(jsoncontent.items.length)
+    // console.log("Zeile 108")
+    // console.log(jsoncontent.items.length)
 		bridgecreateaufruf(i.toString(), jsoncontent);
 	}
   var aktlistname = document.getElementsByClassName("aktlistname");
@@ -204,9 +204,13 @@ function alllistsbox(allitemsjson){
   }
 }
 
-async function createnewlist(newlistname = {}){
+async function createnewlist(){
+  console.log(newlistname);
   var getallurl = urlshort.slice(0, urlshort.length - 1);
   console.log(getallurl);
+  var newname = document.getElementById("idlistinput").value;
+  var newlistname = {"name": newname};
+  console.log(newlistname);
   const response = await fetch(getallurl, {
     method: "POST",
     headers: {
@@ -216,17 +220,12 @@ async function createnewlist(newlistname = {}){
     body: JSON.stringify(newlistname),
   });
   var getalllistsjson = await response.json();
-  console.log(getalllistsjson);
   closedialog();
   deletealllistboxes();
   getalllists();
 }
 
 function deletealllistboxes(){
-  // var elements = document.getElementsByClassName("itemrows");
-  //     while(elements.length > 0){
-  //         elements[0].parentNode.removeChild(elements[0]);
-      // }
   var node= document.getElementById("listlist");
   node.querySelectorAll('*').forEach(n => n.remove());
 }
@@ -263,14 +262,14 @@ function setlistid(){
 
 window.onload = function() {
   urlshort = 'http://shopping-lists-api.herokuapp.com/api/v1/lists/';
-  urlgenerator('5db025be2e4f8f0017e5c5b0')
+  urlgenerator('5dbc1caded629e00171e28e2')
   getalllists();
 
   var postrequest = document.getElementById("postrequest");
   postrequest.addEventListener("click", testparpos);
 
   var inputposenter = document.getElementById("inputpostitem");
-  inputposenter.addEventListener("keyup", function(event) {
+  inputposenter.addEventListener("keydown", function(event) {
     if (event.keyCode == 13) {
       testparpos();
     }
@@ -280,9 +279,9 @@ window.onload = function() {
 
   var listidpost = document.getElementById("listidpost");
   listidpost.addEventListener("click", function(){
-    var newname = document.getElementById("idlistinput").value;
-    var newlistname = {"name": newname};
-    createnewlist(newlistname);
+    // var newname = document.getElementById("idlistinput").value;
+    // var newlistname = {"name": newname};
+    createnewlist();
   })
 
   idnrdict = {};
@@ -315,4 +314,12 @@ window.onload = function() {
   idlistinput.addEventListener("click", function(){
      idlistinput.value = "";
   });
+
+  // var idlistinput = document.getElementById("idlistinput");
+  idlistinput.addEventListener("keydown", function(event) {
+    if (event.keyCode == 37) {
+      createnewlist();
+    }
+  });
+
 }
