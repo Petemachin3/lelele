@@ -66,7 +66,7 @@ html,body{
   list-style-type: none;
   border-radius: 5px;
   width: 200px;
-  height: content-minimum;
+  height: min-content;
   border: 1px solid black;
   padding: 5px;
   margin-right: 8px;
@@ -103,14 +103,14 @@ html,body{
   border-radius: 5px;
   padding: 7px;
 }
-/*
-.topics input{
+
+input{
   margin: 0.5em;
   list-style-type: none;
   border: 1px solid black;
   border-radius: 5px;
   padding: 7px;
-} */
+}
 
 #Überschrift{
   border-bottom: 3px solid black;
@@ -122,6 +122,7 @@ html,body{
 
 .anotherlist:hover{
   border: 1px solid antiquewhite;
+  cursor: pointer;
 }
 
 .anotherlist:focus{
@@ -308,6 +309,17 @@ button {
 
 #listheader span{
   margin: 1em;
+}
+
+#inputlistbyid{
+  margin: 0;
+  margin-bottom: 5px;
+  width: 130px;
+}
+
+#butlistbyid{
+  margin: 0.5em;
+  margin-left: 45%;
 }
 
 .buttontext{

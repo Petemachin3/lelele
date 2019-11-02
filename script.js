@@ -1,22 +1,26 @@
 // Functions
-function urlgenerator(newlistid){
+function urlgenerator(newlistid, listbyid = false){
   listid = newlistid;
   var url = urlshort + newlistid;
   // allitemsdel();
   delitemsbyparent("createreturn");
-  apiabfrage(url);
+  apiabfrage(url, listbyid);
 }
 
 // function setboxcolor(){
 // }
 
 
-async function apiabfrage(url) {
+async function apiabfrage(url, listbyid) {
   const response = await fetch(url);
   getJson = await response.json();
-  c = JSON.stringify(getJson);
+  // c = JSON.stringify(getJson);
 
 	allitemget(getJson);
+  if (listbyid) {
+    console.log(listbyid);
+    listboxbyid(getJson);
+  }
 }
 
 async function postdata(url = '', data = {}, requesttype = ''){
@@ -238,6 +242,21 @@ function alllistsbox(allitemsjson){
   }
 }
 
+function listboxbyid(allitemsjson){
+  delitemsbyparent("listboxbyid");
+  var listlist = document.getElementById("listboxbyid");
+  // var listid = "abc";
+  console.log("listboxbyid")
+  newbox = document.createElement('li');
+    newbox.id = "il" + allitemsjson._id; // id "li" + itemid ist evtl schon vergeben
+    // console.log(newbox.id)
+    newbox.className = "anotherlist";
+    newbox.textContent = allitemsjson.name;
+    newbox.style.backgroundColor = "lightgreen";
+  listlist.appendChild(newbox);
+  generischEventlistenerakt(allitemsjson._id, allitemsjson, true);
+}
+
 async function createnewlist(){
   // console.log(newlistname);
   var getallurl = urlshort.slice(0, urlshort.length - 1);
@@ -261,10 +280,17 @@ async function createnewlist(){
   getalllists();
 }
 
-function generischEventlistenerakt(listid, jsoncontent){
-  var listbox = document.getElementById("li" + listid);
+function generischEventlistenerakt(listid, jsoncontent, getlistbyid = false){
+  console.log("test")
+  if (getlistbyid) {
+    var listbox = document.getElementById("il" + listid);
+  }
+  else {
+    var listbox = document.getElementById("li" + listid);
+  }
   listbox.addEventListener("click", function(){
     // allitemsdel();
+    console.log("imEventlistener");
     delitemsbyparent("createreturn");
     urlgenerator(jsoncontent._id);
     document.getElementById("inputpostitem").value = "";
@@ -272,7 +298,13 @@ function generischEventlistenerakt(listid, jsoncontent){
     for (var i = 0; i < def.length; i++) {
       def[i].style.backgroundColor = "lightgreen";
     }
-    document.getElementById("li" + listid).style.backgroundColor = "lightblue";
+    if (getlistbyid) {
+      var listboxstr = "il" + listid;
+    }
+    else {
+      var listboxstr = "li" + listid;
+    }
+    document.getElementById(listboxstr).style.backgroundColor = "lightblue";
   });
 }
 
@@ -312,7 +344,7 @@ async function getlistbyid(){
   setstartpage();
   var inputlistbyid = document.getElementById("inputlistbyid").value;
   console.log(inputlistbyid);
-  urlgenerator(inputlistbyid);
+  urlgenerator(inputlistbyid, true);
   // getalllists();
   // urlgenerator('5dbcbeab8b9c590017a97a5e');
   // var url = urlshort + listid;
@@ -384,5 +416,16 @@ window.onload = function() {
 
   var butlistbyid = document.getElementById("butlistbyid");
   butlistbyid.addEventListener("click", getlistbyid);
+
+  var inputlistbyid = document.getElementById("inputlistbyid");
+  inputlistbyid.addEventListener("click", function(){
+     inputlistbyid.value = "";
+  });
+
+  inputlistbyid.addEventListener("keydown", function(event) {
+    if (event.keyCode == 13) {
+      getlistbyid();
+    }
+  });
 
 }
