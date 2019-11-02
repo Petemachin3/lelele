@@ -14,7 +14,7 @@ html,body{
   grid-template-columns: minmax(200px, 20%) auto;
   grid-template-rows: min-content min-content min-content;
   grid-template-areas:
-    "header header"
+    "header headerlistname"
     "side inhalt"
     "footer footer"
 }
@@ -26,6 +26,12 @@ html,body{
   background-color: lightgreen;
 }
 
+.headerlistname{
+  grid-area: headerlistname;
+  padding-top: 80px;
+  /* font-size: 9pt; */
+  background-color: lightgreen;
+}
 .header div{
   padding: 0 0 0 0;
 }
@@ -176,10 +182,10 @@ input{
   width: 100%;
   text-align: left;
 } */
-
+/*
 .inhalt h1{
   padding-bottom: 170px;
-}
+} */
 
 .itemcontent{
   border: 1px solid black;
@@ -314,7 +320,8 @@ button {
 #inputlistbyid{
   margin: 0;
   margin-bottom: 5px;
-  width: 130px;
+  width: 90%;
+
 }
 
 #butlistbyid{
@@ -353,4 +360,8 @@ button {
 
 .side dialog[open] {
 	display: block;
+}
+
+h1{
+  padding: 0px;
 }

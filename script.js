@@ -118,8 +118,30 @@ async function allitemget(jsoncontent){
         butlistdel.id = "bd" + listid; // bd --> button delete
         butlistdel.className = "buttontext";
       spanlistdel.appendChild(butlistdel);
+    var spanlistcopy = document.createElement('span');
+      spanlistcopy.id = "sc" + listid; // sd --> span delete
+      var butlistcopy = document.createElement('button');
+        butlistcopy.textContent = "ID kopieren";
+        butlistcopy.id = "bc" + listid; // bd --> button delete
+        butlistcopy.className = "buttontext";
+        butlistcopy.addEventListener("click", function(){
+          const el = document.createElement('textarea');
+          el.value = listid;
+          document.body.appendChild(el);
+          el.select();
+          document.execCommand('copy');
+          document.body.removeChild(el);
+        })
+      spanlistcopy.appendChild(butlistcopy);
+      // console.log("il" + listid);
+      // if (document.getElementById("il" + listid) == null) {
+      //   console.log("einmaligeliste");
+      // }
+      // else {
+      // }
+    listheader.appendChild(spanlistdel);
+    listheader.appendChild(spanlistcopy);
     listheader.appendChild(spanlistid);
-    listheader.appendChild(spanlistdel)
   generischEventlistenerlistdel(listid);
 
 	for (var i = 0; i < jsoncontent.items.length; i++){
@@ -141,6 +163,7 @@ function generischEventlistenerlistdel(listid){
       setstartpage();
       await Sleep(300); // Timer, da löschen auf dem Server einen Moment dauert
       getalllists(true);
+      setstartpage();
 	});
 }
 
@@ -252,7 +275,7 @@ function listboxbyid(allitemsjson){
     // console.log(newbox.id)
     newbox.className = "anotherlist";
     newbox.textContent = allitemsjson.name;
-    newbox.style.backgroundColor = "lightgreen";
+    newbox.style.backgroundColor = "lightblue";
   listlist.appendChild(newbox);
   generischEventlistenerakt(allitemsjson._id, allitemsjson, true);
 }
@@ -345,11 +368,6 @@ async function getlistbyid(){
   var inputlistbyid = document.getElementById("inputlistbyid").value;
   console.log(inputlistbyid);
   urlgenerator(inputlistbyid, true);
-  // getalllists();
-  // urlgenerator('5dbcbeab8b9c590017a97a5e');
-  // var url = urlshort + listid;
-  // delitemsbyparent("createreturn");
-  // apiabfrage(url);
 }
 //
 // function delcach(){
