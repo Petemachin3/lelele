@@ -332,8 +332,8 @@ button {
   border-radius: 5px;
   border: 1px solid black;
   padding: 5px;
-  margin-right: 8px;
-  margin-top: 5px;
+  margin: 8px;
+  /* margin-top: 5px; */
 }
 
 .buttontext:hover{
