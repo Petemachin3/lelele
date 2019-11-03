@@ -7,10 +7,6 @@ function urlgenerator(newlistid, listbyid = false){
   apiabfrage(url, listbyid);
 }
 
-// function setboxcolor(){
-// }
-
-
 async function apiabfrage(url, listbyid) {
   const response = await fetch(url);
   getJson = await response.json();
@@ -23,7 +19,7 @@ async function apiabfrage(url, listbyid) {
   }
 }
 
-async function postdata(url = '', data = {}, requesttype = ''){
+async function postdata(url = '', data = {}, requesttype = '', deletelist = false){
   const response = await fetch(url, {
     method: requesttype, // *GET, POST, PUT, DELETE, etc.
     // mode: 'cors', // cors, no-cors, *cors, same-origin
@@ -38,7 +34,7 @@ async function postdata(url = '', data = {}, requesttype = ''){
   getJson = await response.json();
 	// console.log(JSON.stringify(getJson));
 
-  if (requesttype == "DELETE") {
+  if (deletelist) {
     delitemsbyparent("createreturn");
   }
   else {
@@ -101,6 +97,7 @@ function bridgecreateaufruf(itemnr, jsoncontent){
 
 async function allitemget(jsoncontent){
   // makingqrcode();
+  delitemsbyparent("qrcodelistpic"); // vorhandenen QRCode löschen
   makingqrcode(urlshort + listid, "80", "90EE90", "qrcodelistpic");
   // *************** vorherigen Header löschen, falls vorhanden
   delitemsbyparent("listheader");
@@ -157,11 +154,24 @@ async function allitemget(jsoncontent){
 	}
 
   var allitemsplaintext = "";
-  for (var i = 0; i < listitemsname.length; i++) {
-    allitemsplaintext += "-%0" + listitemsname[i] + "%0A"; // Formatierung der Items im QR
-    console.log(stringify(jsoncontent.items[i].bought));
+  if (listitemsname.length == 0) {
+    allitemsplaintext = "noch keine Items vorhanden";
   }
-  makingqrcode(allitemsplaintext, "80", "90EE90", "qrcodeitemspic");
+  else {
+    allitemsplaintext = jsoncontent.name + ":%0A%0A"
+  }
+  for (var i = 0; i < listitemsname.length; i++) {
+    if (jsoncontent.items[i].bought) {
+      var itemchecked = " [checked] "
+    }
+    else {
+      var itemchecked = " [unchecked] "
+    }
+    allitemsplaintext += "- " + listitemsname[i] + itemchecked + "%0A"; // Formatierung der Items im QR
+    console.log(allitemsplaintext);
+  }
+  delitemsbyparent("qrcodeitemspic"); //vorhandenen QRCode löschen
+  makingqrcode(allitemsplaintext, "120", "ADD8E6", "qrcodeitemspic");
 
   var aktlistname = document.getElementsByClassName("aktlistname");
   for (var i = 0; i < aktlistname.length; i++){
@@ -173,7 +183,7 @@ function generischEventlistenerlistdel(listid){
 	var listdeletebox = document.getElementById("bd" + listid);
 	listdeletebox.addEventListener("click", async function(){
 
-      postdata(urlshort + listid, {}, "DELETE");
+      postdata(urlshort + listid, {}, "DELETE", true);
       console.log(listid);
       delitemsbyparent("listlist");
       setstartpage();

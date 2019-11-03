@@ -372,5 +372,10 @@ h1{
 }
 
 #qrcodelistpic{
-  padding: 10px;
+  margin: 10px;
+}
+
+#qrcodeitemspic{
+  margin: 10px;
+  float: right;
 }
