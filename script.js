@@ -100,6 +100,8 @@ function bridgecreateaufruf(itemnr, jsoncontent){
 
 
 async function allitemget(jsoncontent){
+  // makingqrcode();
+  makingqrcode(urlshort + listid, "80", "90EE90", "qrcodelistpic");
   // *************** vorherigen Header löschen, falls vorhanden
   delitemsbyparent("listheader");
   // *************** Infos über die Liste als "Header" im body erstellen (inkl Löschbutton der Liste)
@@ -144,9 +146,23 @@ async function allitemget(jsoncontent){
     listheader.appendChild(spanlistid);
   generischEventlistenerlistdel(listid);
 
+  //************* QR Code der Items
+  var listitemsname = [];
 	for (var i = 0; i < jsoncontent.items.length; i++){
 		bridgecreateaufruf(i.toString(), jsoncontent);
+    listitemsname.push(jsoncontent.items[i].name);
+
+    // allitemsplaintext += "-%0" + jsoncontent.items[i].name + "%0A"; // Formatierung der Items im QR
+    // console.log(stringify(jsoncontent.items[i].bought));
 	}
+
+  var allitemsplaintext = "";
+  for (var i = 0; i < listitemsname.length; i++) {
+    allitemsplaintext += "-%0" + listitemsname[i] + "%0A"; // Formatierung der Items im QR
+    console.log(stringify(jsoncontent.items[i].bought));
+  }
+  makingqrcode(allitemsplaintext, "80", "90EE90", "qrcodeitemspic");
+
   var aktlistname = document.getElementsByClassName("aktlistname");
   for (var i = 0; i < aktlistname.length; i++){
     aktlistname[i].textContent =jsoncontent.name;
@@ -368,6 +384,13 @@ async function getlistbyid(){
   var inputlistbyid = document.getElementById("inputlistbyid").value;
   console.log(inputlistbyid);
   urlgenerator(inputlistbyid, true);
+}
+
+function makingqrcode(codetext = "jo", length = "100", bgcolor = "FF0000", qrsection = "qrcodelistpic"){
+  var qrcodepicsection = document.getElementById(qrsection)
+  var qrcodepic = document.createElement('img');
+    qrcodepic.src = "http://api.qrserver.com/v1/create-qr-code/?data=" + codetext + "&size=" + length + "x" + length + "&ecc=h&color=FF0000&bgcolor=" + bgcolor;
+  qrcodepicsection.appendChild(qrcodepic);
 }
 //
 // function delcach(){

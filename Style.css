@@ -56,8 +56,7 @@ html,body{
 }
 
 .inhalt{
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px;
   border: 3px solid antiquewhite;
   border-radius: 15px;
   margin-left: 5px;
@@ -364,4 +363,14 @@ button {
 
 h1{
   padding: 0px;
+}
+
+#qrcodepic{
+  float: right;
+  vertical-align: bottom;
+  margin: 10px;
+}
+
+#qrcodelistpic{
+  padding: 10px;
 }
