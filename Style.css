@@ -313,8 +313,10 @@ button {
   margin-left: 60%;
 }
 
-#listheader span{
-  margin-right: 1em;
+#listheader li{
+  margin: 1em;
+  border: none;
+  text-align: center;
 }
 
 #inputlistbyid{

@@ -65,7 +65,7 @@ function testpardel(itemid){
 function testparpos(){
   var inputpostitemdata = document.getElementById("inputpostitem").value;
   if (inputpostitemdata == "") {
-    //inputpostitemdata = "Empty"
+    console.log = ("Leeres Eingabefeld")
   }
   else{
     inputpostitemdata = {"name": inputpostitemdata};
@@ -101,29 +101,28 @@ function bridgecreateaufruf(itemnr, jsoncontent){
 
 
 async function allitemget(jsoncontent){
-  // makingqrcode();
   delitemsbyparent("qrcodelistpic"); // vorhandenen QRCode löschen
   makingqrcode(urlshort + listid, "80", "90EE90", "qrcodelistpic");
   // *************** vorherigen Header löschen, falls vorhanden
   delitemsbyparent("listheader");
   // *************** Infos über die Liste als "Header" im body erstellen (inkl Löschbutton der Liste)
   var listheader = document.getElementById("listheader");
-    var spanlistid = document.createElement('span');
+    var spanlistid = document.createElement('li');
       spanlistid.textContent = listid;
-    var spanemaillink = document.createElement('span');
+    var spanemaillink = document.createElement('li');
       var hyperlinklistid = document.createElement('a');
         hyperlinklistid.textContent = "Share via Email";
         hyperlinklistid.id = "si" + listid; // si --> span id (list)
         hyperlinklistid.href= "mailto:pistolmn@gmx.de?subject=My shopping list (" + jsoncontent.name + ")&body=Hi there,%0D%0A %0D%0AI got great news for you! I created a shopping list which you can reach at the following adress: %0D%0A %0D%0A" + urlshort + listid;
       spanemaillink.appendChild(hyperlinklistid);
-    var spanlistdel = document.createElement('span');
+    var spanlistdel = document.createElement('li');
       spanlistdel.id = "sd" + listid; // sd --> span delete
       var butlistdel = document.createElement('button');
         butlistdel.textContent = "Liste löschen";
         butlistdel.id = "bd" + listid; // bd --> button delete
         butlistdel.className = "buttontext";
       spanlistdel.appendChild(butlistdel);
-    var spanlistcopy = document.createElement('span');
+    var spanlistcopy = document.createElement('li');
       spanlistcopy.id = "sc" + listid; // sd --> span delete
       var butlistcopy = document.createElement('button');
         butlistcopy.textContent = "ID kopieren";
