@@ -433,7 +433,7 @@ function makingqrcode(codetext = "jo", length = "100", bgcolor = "FF0000", qrsec
 
 window.onload = function() {
   urlshort = 'http://shopping-lists-api.herokuapp.com/api/v1/lists/';
-  urlgenerator('5dbc1caded629e00171e28e2');
+  urlgenerator('5dc0779cb1366200179dc911');
   getalllists();
 
   var postrequest = document.getElementById("postrequest");
