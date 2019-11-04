@@ -39,8 +39,8 @@
           </ul>
           <ul>
             <li>
-              <input id="inputlistbyid" type="text" placeholder="Listen-ID">
-              <button type="button" class="buttontext" id="butlistbyid">Liste per ID hinzufügen</button>
+              <span id="spaninputlistid"> <input id="inputlistbyid" type="text" placeholder="Listen-ID"></span>
+              <span id="spanbuttlistid"> <button type="button" class="buttontext" id="butlistbyid">Liste per ID hinzufügen</button></span>
             </li>
             <section id="listboxbyid">
 
@@ -60,25 +60,25 @@
           </span>
         </div>
       </div>
-      <div class="inhalt">
-        <div>
-          <input id="inputpostitem" type="text" placeholder= "Name des Items eingeben">
-          <button id="postrequest" class="plusbutton"><img id="startbild" src="Bilder/hinzufügen.png" alt="hinzufügen"></button>
+        <div class="inhalt">
+          <div>
+            <input id="inputpostitem" type="text" placeholder= "Name des Items eingeben">
+            <button id="postrequest" class="plusbutton"><img id="startbild" src="Bilder/hinzufügen.png" alt="hinzufügen"></button>
+          </div>
+          <div>
+            <span>
+              <table id="createreturn">
+                <tr id="defaultcontent">
+                  <td>Es wurde noch keine der Listen geladen.</td>
+                </tr>
+              </table>
+            </span>
+          </div>
         </div>
-        <div>
-          <span>
-            <table id="createreturn">
-              <tr id="defaultcontent">
-                <td>Es wurde noch keine der Listen geladen.</td>
-              </tr>
-            </table>
-          </span>
-          <span id="spanlistheader">
-            <ul id="listheader">
-            </ul>
-          </span>
+        <div id="spanlistheader" class="listbutton">
+          <ul id="listheader">
+          </ul>
         </div>
-      </div>
       <div class="footer">
         <p>© Falterbaum Peter, Kunkel Kilian
           <a href="https://www.wikipedia.org/"><img class="footerimage" src="Bilder/logo.png" alt="logo"></a>
