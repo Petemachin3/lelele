@@ -314,16 +314,22 @@ button {
   float: right;
 }
 
-#listheader{
+#spanlistheader{
   padding: 0;
-  width: 100%;
-  float: left;
+  float: right;
 }
+
 
 #listheader li{
   margin: 1em;
   border: none;
-  text-align: left;
+  text-align: center;
+}
+
+#createreturn{
+  padding-left: 50px;
+  margin: 0;
+  float: left;
 }
 
 #inputlistbyid{
@@ -382,6 +388,7 @@ h1{
   margin: 10px;
 }
 
-#qrcodeitemspic img{
-  float: right;
+#qrcodeitemspic{
+  text-align: center;
+  margin: 10px;
 }
