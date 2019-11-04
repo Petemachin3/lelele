@@ -309,7 +309,7 @@ button {
 
 #listheader{
   float: right;
-  margin-right: 3em;
+  /* margin-right: 1em; */
 }
 
 #listheader span{
@@ -332,7 +332,7 @@ button {
   border-radius: 5px;
   border: 1px solid black;
   padding: 5px;
-  margin: 8px;
+  /* margin: 8px; */
   /* margin-top: 5px; */
 }
 
@@ -378,8 +378,4 @@ h1{
 #qrcodeitemspic{
   margin: 10px;
   float: right;
-}
-
-.Emailhyperlink{
-  margin: 5px;
 }

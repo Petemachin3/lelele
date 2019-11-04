@@ -105,12 +105,12 @@ async function allitemget(jsoncontent){
   var listheader = document.getElementById("listheader");
     var spanlistid = document.createElement('span');
       spanlistid.textContent = listid;
+    var spanemaillink = document.createElement('span');
       var hyperlinklistid = document.createElement('a');
         hyperlinklistid.textContent = "Share via Email";
-        hyperlinklistid.className = "Emailhyperlink"
         hyperlinklistid.id = "si" + listid; // si --> span id (list)
         hyperlinklistid.href= "mailto:pistolmn@gmx.de?subject=My shopping list (" + jsoncontent.name + ")&body=Hi there,%0D%0A %0D%0AI got great news for you! I created a shopping list which you can reach at the following adress: %0D%0A %0D%0A" + urlshort + listid;
-      spanlistid.appendChild(hyperlinklistid);
+      spanemaillink.appendChild(hyperlinklistid);
     var spanlistdel = document.createElement('span');
       spanlistdel.id = "sd" + listid; // sd --> span delete
       var butlistdel = document.createElement('button');
@@ -142,6 +142,7 @@ async function allitemget(jsoncontent){
     listheader.appendChild(spanlistdel);
     listheader.appendChild(spanlistcopy);
     listheader.appendChild(spanlistid);
+    listheader.appendChild(spanemaillink);
   generischEventlistenerlistdel(listid);
 
   //************* QR Code der Items
