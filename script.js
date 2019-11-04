@@ -137,16 +137,18 @@ async function allitemget(jsoncontent){
           document.body.removeChild(el);
         })
       spanlistcopy.appendChild(butlistcopy);
-      // console.log("il" + listid);
-      // if (document.getElementById("il" + listid) == null) {
-      //   console.log("einmaligeliste");
-      // }
-      // else {
-      // }
+    var spansharewa = document.createElement('li');
+      spansharewa.id = "wa" + listid;
+      var qrwapic = document.createElement('img');
+        qrwapic.alt = "Whatsapp teilen QrCode";
+        qrwapic.id = "wp" + listid;
+      spansharewa.appendChild(qrwapic);
+
     listheader.appendChild(spanlistdel);
     listheader.appendChild(spanlistcopy);
     listheader.appendChild(spanlistid);
     listheader.appendChild(spanemaillink);
+    listheader.appendChild(spansharewa);
   generischEventlistenerlistdel(listid);
 
   //************* QR Code der Items
@@ -154,11 +156,22 @@ async function allitemget(jsoncontent){
 	for (var i = 0; i < jsoncontent.items.length; i++){
 		bridgecreateaufruf(i.toString(), jsoncontent);
     listitemsname.push(jsoncontent.items[i].name);
-
-    // allitemsplaintext += "-%0" + jsoncontent.items[i].name + "%0A"; // Formatierung der Items im QR
-    // console.log(stringify(jsoncontent.items[i].bought));
 	}
 
+  var allitemsplaintext = creatplaintextfromjson(jsoncontent, listitemsname);
+
+  delitemsbyparent("qrcodeitemspic"); //vorhandenen QRCode löschen
+  makingqrcode(allitemsplaintext, "120", "ADD8E6", "qrcodeitemspic");
+
+  var waplaintext = creatplaintextfromjson(jsoncontent, listitemsname, true);
+  document.getElementById("wp" + listid).src = "http://api.qrserver.com/v1/create-qr-code/?data=https://api.whatsapp.com/send?text=" + waplaintext + "&size=100x100&ecc=h&color=FF0000&bgcolor=ADD8E6"
+  var aktlistname = document.getElementsByClassName("aktlistname");
+  for (var i = 0; i < aktlistname.length; i++){
+    aktlistname[i].textContent =jsoncontent.name;
+  }
+}
+
+function creatplaintextfromjson(jsoncontent, listitemsname, washare = false){
   var allitemsplaintext = "";
   if (listitemsname.length == 0) {
     allitemsplaintext = "noch keine Items vorhanden";
@@ -166,23 +179,25 @@ async function allitemget(jsoncontent){
   else {
     allitemsplaintext = jsoncontent.name + ":%0A%0A"
   }
+  var spacechar = "";
+  if (washare) {
+    spacechar = "";
+  }
+  else {
+    spacechar = "%20";
+  }
   for (var i = 0; i < listitemsname.length; i++) {
     if (jsoncontent.items[i].bought) {
-      var itemchecked = " [checked] "
+      var itemchecked = spacechar + "[checked]" + spacechar;
     }
     else {
-      var itemchecked = " [unchecked] "
+      var itemchecked = spacechar + "[unchecked]" + spacechar;
     }
-    allitemsplaintext += "- " + listitemsname[i] + itemchecked + "%0A"; // Formatierung der Items im QR
+    allitemsplaintext += "-" + spacechar + listitemsname[i] + itemchecked + "%0A"; // Formatierung der Items im QR
     console.log(allitemsplaintext);
   }
-  delitemsbyparent("qrcodeitemspic"); //vorhandenen QRCode löschen
-  makingqrcode(allitemsplaintext, "120", "ADD8E6", "qrcodeitemspic");
 
-  var aktlistname = document.getElementsByClassName("aktlistname");
-  for (var i = 0; i < aktlistname.length; i++){
-    aktlistname[i].textContent =jsoncontent.name;
-  }
+  return allitemsplaintext;
 }
 
 function generischEventlistenerlistdel(listid){
