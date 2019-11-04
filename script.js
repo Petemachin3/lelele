@@ -65,7 +65,7 @@ function testpardel(itemid){
 function testparpos(){
   var inputpostitemdata = document.getElementById("inputpostitem").value;
   if (inputpostitemdata == "") {
-    console.log = ("Leeres Eingabefeld")
+    //console.log = ("Leeres Eingabefeld")
   }
   else{
     inputpostitemdata = {"name": inputpostitemdata};
