@@ -26,7 +26,7 @@ html,body{
   background-color: lightgreen;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
   .grid {
     grid-template-columns: minmax(0, 0) auto;
   }
@@ -116,7 +116,6 @@ html,body{
   border: 1px solid black;
   border-radius: 5px;
   padding: 7px;
-  overflow: hidden;
 }
 
 input{
@@ -185,33 +184,13 @@ input{
   cursor: default;
 }
 
-/* li button{
-  width: 100%;
-  text-align: left;
-} */
-/*
-.inhalt h1{
-  padding-bottom: 170px;
-} */
-
-.itemcontent{
-  border: 1px solid black;
-  /* list-style-type: none; */
-  border-radius: 5px;
-  width: 200px;
-  height: content-minimum;
-  border: 1px solid black;
-  padding: 5px;
-  margin-right: 8px;
-  margin-top: 5px;
-}
 
 .löschbutton{
   border: 1px solid black;
   border-radius: 5px;
   width: 100px;
   height: content-minimum;
-  background-color: yellow;
+  background-color: lightcoral;
 }
 
 /*--------------------------------------*/
@@ -297,11 +276,68 @@ button {
   outline-style: none;
 }
 
-#inputpostitem{
-  padding-left: 20px;
-  width: 40%;
+.itemcontent{
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 100%;
+  height: content-minimum;
+  border: 1px solid black;
+  padding: 5px;
+  margin-right: 8px;
+  word-break: break-all;
 }
 
+
+#createreturn{
+  min-width: 400px;
+  width: 70%;
+  padding-left: 50px;
+  float: left;
+}
+
+#spanlistheader{
+  width: 30%;
+  padding: 0;
+  float: right;
+}
+
+
+#inputpostitem{
+  width: 237px;
+  margin-left: 90px;
+}
+
+#listheader{
+  padding: 0;
+}
+
+#listheader li{
+  margin: 1em;
+  border: none;
+  text-align: center;
+}
+
+
+@media (max-width: 900px){
+  #spanlistheader{
+    text-align: center;
+    float: left;
+    margin-left: 22%;
+  }
+
+  #createreturn{
+    padding: 0;
+    width: 90%;
+  }
+  #inputpostitem{
+    margin-left: 40px;
+  }
+}
+
+
+#postrequest{
+  bottom: 0;
+}
 
 #startbild{
   height: 35px;
@@ -314,22 +350,10 @@ button {
   float: right;
 }
 
-#spanlistheader{
-  padding: 0;
-  float: right;
-}
-
-
-#listheader li{
-  margin: 1em;
-  border: none;
-  text-align: center;
-}
-
-#createreturn{
-  padding-left: 50px;
-  margin: 0;
-  float: left;
+input[type="checkbox"]{
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
 }
 
 #inputlistbyid{
