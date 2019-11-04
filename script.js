@@ -64,11 +64,16 @@ function testpardel(itemid){
 
 function testparpos(){
   var inputpostitemdata = document.getElementById("inputpostitem").value;
-  inputpostitemdata = {"name": inputpostitemdata};
-  // console.log(typeof(inputpostitemdata));
-  posurl = urlshort + listid + "/items";
-  postdata(posurl, inputpostitemdata, "POST");
-  document.getElementById("inputpostitem").value = "";
+  if (inputpostitemdata == "") {
+    //inputpostitemdata = "Empty"
+  }
+  else{
+    inputpostitemdata = {"name": inputpostitemdata};
+    //console.log(typeof(inputpostitemdata));
+    posurl = urlshort + listid + "/items";
+    postdata(posurl, inputpostitemdata, "POST");
+    document.getElementById("inputpostitem").value = "";
+  }
 }
 
 function testparput(itemid){

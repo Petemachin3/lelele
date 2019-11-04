@@ -26,6 +26,12 @@ html,body{
   background-color: lightgreen;
 }
 
+@media (max-width: 300px) {
+  .header {
+    display: none;
+  }
+}
+
 .headerlistname{
   grid-area: headerlistname;
   padding-top: 80px;
@@ -49,10 +55,6 @@ html,body{
 .pic{
   margin: 2em;
   width: auto;
-}
-
-#listcreate{
-  /* margin-bottom: 10px; */
 }
 
 .inhalt{
@@ -110,6 +112,7 @@ html,body{
 }
 
 input{
+  outline: none;
   margin: 0.5em;
   list-style-type: none;
   border: 1px solid black;
@@ -239,19 +242,17 @@ input{
 	display: block;
 }
 
-@media (min-width: 20em) {
-	.topics dialog {
-    overflow: visible;
-    position: relative;
-    margin-left: calc(10%-500px);
-    margin-right: calc(10%+500px);
-    padding-left: 2em;
-    padding-right: 2em;
-    width: 30%;
-    min-width: 300px;
-  }
-
+.topics dialog {
+  overflow: visible;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2em;
+  padding-right: 2em;
+  width: 30%;
+  min-width: 300px;
 }
+
 
 .topics dialog::backdrop, #backdrop {
 	/* position: fixed; */
@@ -309,11 +310,11 @@ button {
 
 #listheader{
   float: right;
-  /* margin-right: 1em; */
+  margin-left: 60%;
 }
 
 #listheader span{
-  margin: 1em;
+  margin-right: 1em;
 }
 
 #inputlistbyid{
@@ -324,8 +325,8 @@ button {
 }
 
 #butlistbyid{
+  width: 90%;
   margin: 0.5em;
-  margin-left: 45%;
 }
 
 .buttontext{
@@ -341,7 +342,7 @@ button {
 }
 
 .plusbutton:hover, .plusbutton:focus {
-  transform:scale(1.4);
+  transform:scale(1.3);
 }
 
 .side dialog {
