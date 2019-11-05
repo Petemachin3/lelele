@@ -19,8 +19,8 @@ async function apiabfrage(url, listbyid) {
   } catch (e) {
     var secdialog = document.getElementById("secdialog");
     var qrdialog = document.createElement('dialog');
-      qrdialog.className = "qrdialog";
-      qrdialog.id = "da";
+    qrdialog.className = "qrdialog";
+    qrdialog.id = "da";
     var textcode = document.createElement('h2');
     textcode.textContent = "Du bist gestrandet:";
     textcode.style.margin = "2px";
@@ -169,8 +169,8 @@ async function allitemget(jsoncontent) {
   // var qrdialog = document.getElementById('qrdialog');
   var secdialog = document.getElementById("secdialog");
   var qrdialog = document.createElement('dialog');
-    qrdialog.className = "qrdialog";
-    qrdialog.id = "di" + listid;
+  qrdialog.className = "qrdialog";
+  qrdialog.id = "di" + listid;
   var diasharewa = document.createElement('img');
   diasharewa.alt = "Whatsapp teilen QrCode";
   diasharewa.id = "wp" + listid;

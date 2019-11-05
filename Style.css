@@ -6,7 +6,7 @@ html,body{
   padding-left: 0;
   font-family: sans-serif;
 }
-
+ /* -------- GRID ---------- */
 .grid{
   width: 100%;
   height: 100%;
@@ -26,42 +26,10 @@ html,body{
   background-color: lightgreen;
 }
 
-@media (max-width: 640px) {
-  .grid{
-    grid-template-columns: 0 auto;
-    grid-template-rows: 150px min-content min-content min-content min-content;
-    grid-template-areas:
-    "header headerlistname"
-    "side side"
-    "inhalt inhalt"
-    "inhaltfooter inhaltfooter"
-    "footer footer"
-  }
-  .inhalt .side .footer{
-    width: 94%;
-  }
-
-  #qrqrcodelistpic #qrqrcodeitemspic{
-    width: 0;
-  }
-  #qrqrcodeitemspic{
-    width: 0;
-  }
-}
-
-
 .headerlistname{
   grid-area: headerlistname;
   padding-top: 80px;
   background-color: lightgreen;
-}
-
-.header div{
-  padding: 0 0 0 0;
-}
-
-#Banner{
-  padding-left: 40px;
 }
 
 .side{
@@ -73,11 +41,6 @@ html,body{
   margin-bottom: 1%;
   background-color: lightgrey;
   border: 2px solid black;
-}
-
-.pic{
-  margin: 2em;
-  width: auto;
 }
 
 .inhalt{
@@ -92,6 +55,61 @@ html,body{
   line-height: 1.6;
   background-color: lightblue;
 }
+
+.footer{
+  grid-area: footer;
+  font-size: 70%;
+  background-color: lightgreen;
+  margin-left: 1%;
+}
+
+ /* -------- HEADER ---------- */
+
+.header div{
+  padding: 0 0 0 0;
+}
+
+#Banner{
+  padding-left: 40px;
+}
+
+h1{
+  padding: 0px;
+}
+
+ /* -------- SIDE ---------- */
+
+#Listennamediv{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  height: 0px;
+}
+
+#Listennamediv:hover{
+  cursor: default;
+}
+
+#überschrift{
+  border-bottom: 3px solid black;
+}
+
+.topics ul{
+  padding-left: 0;
+  padding-bottom: 5px;
+}
+
+.topics li{
+  word-wrap: break-word;
+  margin: 0.5em;
+  list-style-type: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 7px;
+  overflow: hidden;
+}
+
+ /* -------- INHALT ---------- */
 
 .inhalt div{
   padding: 20px;
@@ -108,39 +126,6 @@ html,body{
   margin-top: 5px;
 }
 
-.footer{
-  grid-area: footer;
-  font-size: 70%;
-  background-color: lightgreen;
-  margin-left: 1%;
-}
-
-.footerimage{
-  padding-left: 5px;
-  padding-right: 5px;
-  height: 15px;
-}
-
-.footer p{
-  margin-right: 20px;
-  text-align: right;
-  }
-
-.topics ul{
-  padding-left: 0;
-  padding-bottom: 35px;
-}
-
-.topics li{
-  word-wrap: break-word;
-  margin: 0.5em;
-  list-style-type: none;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 7px;
-  overflow: hidden;
-}
-
 input{
   outline: none;
   margin-bottom: 0.5em;
@@ -148,10 +133,6 @@ input{
   border: 1px solid black;
   border-radius: 5px;
   padding: 7px;
-}
-
-#überschrift{
-  border-bottom: 3px solid black;
 }
 
 .anotherlist:hover{
@@ -163,20 +144,8 @@ input{
   background-color: yellow;
 }
 
-#Listennamediv{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-  height: 0px;
-}
-
-#Listennamediv:hover{
-  cursor: default;
-}
-
 .itemcontent{
   border: 1px solid black;
-  /* list-style-type: none; */
   border-radius: 5px;
   width: 250px;
   height: content-minimum;
@@ -194,8 +163,20 @@ input{
   background-color: yellow;
 }
 
-/*-----------DIALOG----------------*/
+/* -------- FOOTER ---------- */
 
+.footerimage{
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 15px;
+}
+
+.footer p{
+  margin-right: 20px;
+  text-align: right;
+}
+
+/*-----------DIALOG----------*/
 
 dialog[open="open"] {
 	display: block;
@@ -206,7 +187,6 @@ dialog {
   padding-left: 2em;
   padding-right: 2em;
 }
-
 
 dialog::backdrop, #backdrop {
 	position: fixed;
@@ -232,6 +212,12 @@ dialog #close-dialog {
 	font-size: 0.74em;
   border-radius: 0.5em;
   outline: 0;
+}
+
+#dialogplus{
+  padding-top: 1px;
+  height: 15px;
+  float: right;
 }
 
 /*--------BUTTON--------------*/
@@ -260,15 +246,8 @@ button {
   display: block;
 }
 
-
 #startbild{
   height: 35px;
-  float: right;
-}
-
-#dialogplus{
-  padding-top: 1px;
-  height: 15px;
   float: right;
 }
 
@@ -276,18 +255,6 @@ button {
   padding: 0;
   float: right;
   overflow: hidden;
-}
-
-@media(max-width: 970px){
-  #spanlistheader{
-    width: 100%;
-  }
-  #createreturn{
-    float: none;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-  }
 }
 
 #listheader li{
@@ -334,12 +301,7 @@ button {
   transform:scale(1.3);
 }
 
-.waqrcode{
-  width: 100%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
+/* -----------QRCODE------------ */
 
 dialog {
   margin-left: auto;
@@ -361,8 +323,11 @@ dialog[open] {
 	display: block;
 }
 
-h1{
-  padding: 0px;
+.waqrcode{
+  width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #qrcodepic{
@@ -378,7 +343,6 @@ h1{
 #qrcodeitemspic{
   text-align: center;
   margin: 10px;
-  /* border-width: thick;  */
 }
 
 .qrdialog{
@@ -393,4 +357,41 @@ h1{
   float: right;
   color: white;
   margin-top: 5px;
+}
+
+/* -----------RESPONSIVE DESGIN------------ */
+
+@media(max-width: 970px){
+  #spanlistheader{
+    width: 100%;
+  }
+  #createreturn{
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid{
+    grid-template-columns: 0 auto;
+    grid-template-rows: 150px min-content min-content min-content min-content;
+    grid-template-areas:
+    "header headerlistname"
+    "side side"
+    "inhalt inhalt"
+    "inhaltfooter inhaltfooter"
+    "footer footer"
+  }
+  .inhalt .side .footer{
+    width: 94%;
+  }
+
+  #qrqrcodelistpic #qrqrcodeitemspic{
+    width: 0;
+  }
+  #qrqrcodeitemspic{
+    width: 0;
+  }
 }
