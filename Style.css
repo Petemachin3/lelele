@@ -37,8 +37,8 @@ html,body{
     display: none;
   } */
   .grid{
-    grid-template-columns: 170px auto;
-    grid-template-rows: min-content min-content min-content min-content min-content;
+    grid-template-columns: 0 auto;
+    grid-template-rows: 150px min-content min-content min-content min-content;
     grid-template-areas:
     "header headerlistname"
     "side side"
@@ -47,15 +47,16 @@ html,body{
     "footer footer"
   }
   #Banner{
-    padding-left: 10px;
+    visibility: hidden;
+
   }
-  /* .header, .inhalt, .side, .footer{
-    position: absolute;
+
+  /* #Listennamediv{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   } */
-  /* .header{
-    top: 0;
-    bottom: auto;
-  } */
+
   .inhalt{
     width: 94%;
     /* margin-top: 450px;
@@ -78,6 +79,7 @@ html,body{
   }
 }
 
+
 .headerlistname{
   grid-area: headerlistname;
   padding-top: 80px;
@@ -86,6 +88,10 @@ html,body{
 
 .header div{
   padding: 0 0 0 0;
+}
+
+#Banner{
+  padding-left: 40px;
 }
 
 .side{
@@ -204,10 +210,6 @@ input{
   font-weight: normal;
   font-family: sans-serif;
   margin-left: 5em;
-}
-
-#Banner button{
-  padding-left: 40px;
 }
 
 
