@@ -244,7 +244,7 @@ input{
   border: 1px solid black;
   /* list-style-type: none; */
   border-radius: 5px;
-  width: 200px;
+  width: 250px;
   height: content-minimum;
   border: 1px solid black;
   padding: 5px;
@@ -371,8 +371,20 @@ button {
 #spanlistheader{
   padding: 0;
   float: right;
+  overflow: hidden;
 }
 
+@media(max-width: 970px){
+  #spanlistheader{
+    width: 100%;
+  }
+  #createreturn{
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+}
 
 #listheader li{
   margin: 1em;
@@ -381,10 +393,10 @@ button {
 }
 
 #createreturn{
-  padding-left: 50px;
   margin: 0;
   float: left;
   display: run-in;
+  word-break: break-all;
 }
 
 #inputlistbyid{
