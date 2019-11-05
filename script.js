@@ -8,14 +8,53 @@ function urlgenerator(newlistid, listbyid = false) {
 }
 
 async function apiabfrage(url, listbyid) {
-  const response = await fetch(url);
-  getJson = await response.json();
-  // c = JSON.stringify(getJson);
+  try {
+    const response = await fetch(url);
+    getJson = await response.json();
 
-  allitemget(getJson);
-  if (listbyid) {
-    listboxbyid(getJson);
+    allitemget(getJson);
+    if (listbyid) {
+      listboxbyid(getJson);
+    }
+  } catch (e) {
+    var secdialog = document.getElementById("secdialog");
+    var qrdialog = document.createElement('dialog');
+      qrdialog.className = "qrdialog";
+      qrdialog.id = "da";
+    var textcode = document.createElement('h2');
+    textcode.textContent = "Du bist gestrandet:";
+    textcode.style.margin = "2px";
+    textcode.style.borderRadius = "5px";
+    textcode.style.backgroundColor = "#ADD8E6";
+    textcode.style.padding = "5px";
+    var textcodenewline = document.createElement('h3');
+    textcodenewline.textContent = e;
+    textcode.appendChild(textcodenewline);
+    qrdialog.appendChild(textcode);
+    var diasharewa = document.createElement('img');
+    diasharewa.alt = "Whatsapp teilen QrCode";
+    diasharewa.id = "ap";
+    diasharewa.style.borderRadius = "5px";
+    diasharewa.src = "https://t4.ftcdn.net/jpg/00/02/46/83/500_F_2468300_PczW2Yq9Wgq9I6GYrAx7H5kthMnx7m.jpg"
+    diasharewa.className = "waqrcode";
+    qrdialog.appendChild(diasharewa);
+    var abbrechbutt = document.createElement('button');
+    abbrechbutt.textContent = "Fenster schließen";
+    abbrechbutt.className = "buttontext";
+    abbrechbutt.style.marginTop = "10px";
+    abbrechbutt.style.float = "right";
+    abbrechbutt.style.borderWidth = "5px";
+    abbrechbutt.style.fontWeight = "700";
+    abbrechbutt.style.backgroundColor = "#ADD8E6";
+    abbrechbutt.addEventListener("click", function () {
+      // delitemsbyparent("qrdialogsec"); //QRCode löschen
+      closedialog(qrdialog);
+    });
+    qrdialog.appendChild(abbrechbutt);
+    secdialog.appendChild(qrdialog);
+    opendialog(qrdialog);
   }
+
 }
 
 async function postdata(url = '', data = {}, requesttype = '', deletelist = false) {
@@ -144,6 +183,7 @@ async function allitemget(jsoncontent) {
   abbrechbutt.style.float = "right";
   abbrechbutt.style.borderWidth = "5px";
   abbrechbutt.style.fontWeight = "700";
+  abbrechbutt.style.backgroundColor = "#ADD8E6";
   abbrechbutt.addEventListener("click", function () {
     // delitemsbyparent("qrdialogsec"); //QRCode löschen
     closedialog(qrdialog);
@@ -186,7 +226,7 @@ async function allitemget(jsoncontent) {
   makingqrcode(allitemsplaintext, "120", "D3D3D3", "qrcodeitemspic", "000000");
 
   var waplaintext = creatplaintextfromjson(jsoncontent, listitemsname, true);
-  diasharewa.src = "http://api.qrserver.com/v1/create-qr-code/?data=https://api.whatsapp.com/send?text=" + waplaintext + "&size=500x500&ecc=h&color=6000FF&bgcolor=ADD8E6"
+  diasharewa.src = "http://api.qrserver.com/v1/create-qr-code/?data=https://api.whatsapp.com/send?text=" + waplaintext + "&size=500x500&ecc=h&color=000000&bgcolor=ADD8E6"
   var aktlistname = document.getElementsByClassName("aktlistname");
   for (var i = 0; i < aktlistname.length; i++) {
     aktlistname[i].textContent = jsoncontent.name;
@@ -235,7 +275,6 @@ function creatplaintextfromjson(jsoncontent, listitemsname, washare = false) {
 
   }
 
-  console.log(allitemsplaintext);
   return allitemsplaintext;
 }
 
@@ -435,7 +474,7 @@ async function getlistbyid() {
   urlgenerator(inputlistbyid, true);
 }
 
-function makingqrcode(codetext = "jo", length = "100", bgcolor = "6000FF", qrsection = "qrcodelistpic", color = "6000FF") {
+function makingqrcode(codetext = "jo", length = "100", bgcolor = "000000", qrsection = "qrcodelistpic", color = "000000") {
   var qrcodepicsection = document.getElementById(qrsection)
   var qrcodepic = document.createElement('img');
   qrcodepic.src = "http://api.qrserver.com/v1/create-qr-code/?data=" + codetext + "&size=" + length + "x" + length + "&ecc=h&color=" + color + "&bgcolor=" + bgcolor;
