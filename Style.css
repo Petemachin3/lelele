@@ -76,6 +76,9 @@ html,body{
   #qrqrcodelistpic{
     width: 0;
   }
+  #qrqrcodeitemspic{
+    width: 0;
+  }
 }
 
 
@@ -424,7 +427,7 @@ button {
   border: 1px solid antiquewhite;
 }
 
-.plusbutton:hover, .plusbutton:focus {
+.plusbutton:hover{
   transform:scale(1.3);
 }
 

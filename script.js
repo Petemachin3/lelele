@@ -174,26 +174,40 @@ async function allitemget(jsoncontent){
 function creatplaintextfromjson(jsoncontent, listitemsname, washare = false){
   var allitemsplaintext = "";
   if (listitemsname.length == 0) {
-    allitemsplaintext = "noch keine Items vorhanden";
+    allitemsplaintext = jsoncontent.name + ":%0A%0Anoch keine Items vorhanden";
   }
   else {
-    allitemsplaintext = jsoncontent.name + ":%0A%0A"
   }
   var spacechar = "";
   if (washare) {
-    spacechar = "";
+    spacechar = "_";
+    allitemsplaintext = "*" + jsoncontent.name.replace(/ /g, spacechar) + "*" + ":%0A%0A";
   }
   else {
     spacechar = "%20";
+    allitemsplaintext = jsoncontent.name + ":%0A%0A";
   }
   for (var i = 0; i < listitemsname.length; i++) {
-    if (jsoncontent.items[i].bought) {
-      var itemchecked = spacechar + "[checked]" + spacechar;
+    if (washare) {
+      if (jsoncontent.items[i].bought) {
+        var itemchecked = "";
+      }
+      else {
+        var itemchecked = "~";
+      }
+      listitemsname[i] = listitemsname[i].replace(/ /g, "spacechar");
+      allitemsplaintext += itemchecked + listitemsname[i] + itemchecked + "%0A"; // Formatierung der Items im QR
     }
     else {
-      var itemchecked = spacechar + "[unchecked]" + spacechar;
+      if (jsoncontent.items[i].bought) {
+        var itemchecked = spacechar + "[unchecked]";
+      }
+      else {
+        var itemchecked = spacechar + "[checked]";
+      }
+      allitemsplaintext += "-" + spacechar + listitemsname[i] + itemchecked + "%0A"; // Formatierung der Items im QR
     }
-    allitemsplaintext += "-" + spacechar + listitemsname[i] + itemchecked + "%0A"; // Formatierung der Items im QR
+
     console.log(allitemsplaintext);
   }
 
@@ -204,6 +218,8 @@ function generischEventlistenerlistdel(listid){
 	var listdeletebox = document.getElementById("bd" + listid);
 	listdeletebox.addEventListener("click", async function(){
 
+      delitemsbyparent("qrcodelistpic"); //QRCode löschen
+      delitemsbyparent("qrcodeitemspic"); //QRCode löschen
       postdata(urlshort + listid, {}, "DELETE", true);
       console.log(listid);
       delitemsbyparent("listlist");
@@ -395,6 +411,8 @@ function closedialog(){
 
 function setstartpage(){
   // allitemsdel();
+  delitemsbyparent("qrcodelistpic"); //QRCode löschen
+  delitemsbyparent("qrcodeitemspic"); //QRCode löschen
   delitemsbyparent("createreturn");
   delitemsbyparent("listheader");
   var defaultcontent = document.createElement('td');
@@ -430,6 +448,18 @@ function makingqrcode(codetext = "jo", length = "100", bgcolor = "FF0000", qrsec
 //   console.log("cache geleert");
 // }
 
+function hasWhiteSpace(s)
+{
+    var reWhiteSpace = new RegExp("%20");
+
+    // Check for white space
+    if (reWhiteSpace.test(s)) {
+        //alert("Please Check Your Fields For Spaces");
+        return false;
+    }
+
+    return true;
+}
 
 // Onload bzgl EventListener
 
@@ -502,7 +532,4 @@ window.onload = function() {
     }
   });
 
-  // var responsivewin = window.matchMedia("(max-width: 640px)")
-  // responsiveset(responsivewin);
-  // responsivewin.addListener(responsiveset);
 }
