@@ -144,6 +144,7 @@ async function allitemget(jsoncontent) {
   abbrechbutt.style.float = "right";
   abbrechbutt.style.borderWidth = "5px";
   abbrechbutt.style.fontWeight = "700";
+  abbrechbutt.style.backgroundColor = "#ADD8E6";
   abbrechbutt.addEventListener("click", function () {
     // delitemsbyparent("qrdialogsec"); //QRCode löschen
     closedialog(qrdialog);
@@ -186,7 +187,7 @@ async function allitemget(jsoncontent) {
   makingqrcode(allitemsplaintext, "120", "D3D3D3", "qrcodeitemspic", "000000");
 
   var waplaintext = creatplaintextfromjson(jsoncontent, listitemsname, true);
-  diasharewa.src = "http://api.qrserver.com/v1/create-qr-code/?data=https://api.whatsapp.com/send?text=" + waplaintext + "&size=500x500&ecc=h&color=6000FF&bgcolor=ADD8E6"
+  diasharewa.src = "http://api.qrserver.com/v1/create-qr-code/?data=https://api.whatsapp.com/send?text=" + waplaintext + "&size=500x500&ecc=h&color=000000&bgcolor=ADD8E6"
   var aktlistname = document.getElementsByClassName("aktlistname");
   for (var i = 0; i < aktlistname.length; i++) {
     aktlistname[i].textContent = jsoncontent.name;
@@ -435,7 +436,7 @@ async function getlistbyid() {
   urlgenerator(inputlistbyid, true);
 }
 
-function makingqrcode(codetext = "jo", length = "100", bgcolor = "6000FF", qrsection = "qrcodelistpic", color = "6000FF") {
+function makingqrcode(codetext = "jo", length = "100", bgcolor = "000000", qrsection = "qrcodelistpic", color = "000000") {
   var qrcodepicsection = document.getElementById(qrsection)
   var qrcodepic = document.createElement('img');
   qrcodepic.src = "http://api.qrserver.com/v1/create-qr-code/?data=" + codetext + "&size=" + length + "x" + length + "&ecc=h&color=" + color + "&bgcolor=" + bgcolor;
