@@ -37,21 +37,11 @@ html,body{
     "inhaltfooter inhaltfooter"
     "footer footer"
   }
-  #Banner{
-    visibility: hidden;
+  .inhalt .side .footer{
+    width: 94%;
   }
 
-  .inhalt{
-    width: 94%;
-  }
-  .side{
-    width: 94%;
-    margin-right: 2%;
-  }
-  .footer{
-    width: 94%;
-  }
-  #qrqrcodelistpic{
+  #qrqrcodelistpic #qrqrcodeitemspic{
     width: 0;
   }
   #qrqrcodeitemspic{
@@ -160,12 +150,8 @@ input{
   padding: 7px;
 }
 
-#Überschrift{
+#überschrift{
   border-bottom: 3px solid black;
-}
-
-#AktuelleListe{
-  background-color: antiquewhite;
 }
 
 .anotherlist:hover{
@@ -175,31 +161,6 @@ input{
 
 .anotherlist:focus{
   background-color: yellow;
-}
-
-#Hinzufügen{
-  height: 15px;
-  float: right;
-}
-
-#Hinzufügen:hover{
-  transform:scale(1.7);
-}
-
-#Eingabe{
-  font-size: small;
-  font-style: normal;
-  font-weight: normal;
-  font-family: sans-serif;
-  margin-left: 5em;
-}
-
-
-#Element_hinzufügen{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-  height: 70px;
 }
 
 #Listennamediv{
