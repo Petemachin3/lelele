@@ -451,10 +451,13 @@ h1{
 #qrcodeitemspic{
   text-align: center;
   margin: 10px;
+  /* border-width: thick;  */
 }
 
 #qrdialog{
   padding: 0;
-  background: rgba(0, 0, 0, 0.5);
+  /* background: rgba(0, 0, 0, 0.5); */
+  background: transparent;
   width: 500px;
+  border: none;
 }

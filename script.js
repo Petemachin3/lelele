@@ -149,8 +149,11 @@ async function allitemget(jsoncontent){
       var abbrechbutt = document.createElement('button');
         abbrechbutt.textContent = "Abbrechen";
         abbrechbutt.className = "buttontext";
+        abbrechbutt.style.color = "white";
+        abbrechbutt.style.borderWidth = "5px";
+        abbrechbutt.style.float = "right";
         // abbrechbutt.style.display = "absolute";
-        abbrechbutt.style.top = "5em";
+        // abbrechbutt.style.top = "5em";
         abbrechbutt.addEventListener("click", function(){
           closedialog(qrdialog);
         });
