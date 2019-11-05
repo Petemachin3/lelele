@@ -1,5 +1,5 @@
 // Functions
-function urlgenerator(newlistid, listbyid = false){
+function urlgenerator(newlistid, listbyid = false) {
   listid = newlistid;
   var url = urlshort + newlistid;
   // allitemsdel();
@@ -12,14 +12,14 @@ async function apiabfrage(url, listbyid) {
   getJson = await response.json();
   // c = JSON.stringify(getJson);
 
-	allitemget(getJson);
+  allitemget(getJson);
   if (listbyid) {
     console.log(listbyid);
     listboxbyid(getJson);
   }
 }
 
-async function postdata(url = '', data = {}, requesttype = '', deletelist = false){
+async function postdata(url = '', data = {}, requesttype = '', deletelist = false) {
   const response = await fetch(url, {
     method: requesttype, // *GET, POST, PUT, DELETE, etc.
     // mode: 'cors', // cors, no-cors, *cors, same-origin
@@ -32,7 +32,7 @@ async function postdata(url = '', data = {}, requesttype = '', deletelist = fals
     body: JSON.stringify(data) // body data type must match "Content-Type" header
   });
   getJson = await response.json();
-	// console.log(JSON.stringify(getJson));
+  // console.log(JSON.stringify(getJson));
 
   if (deletelist) {
     delitemsbyparent("createreturn");
@@ -43,10 +43,10 @@ async function postdata(url = '', data = {}, requesttype = '', deletelist = fals
   }
 }
 
-async function getalllists(listdel = false){
+async function getalllists(listdel = false) {
   var getallurl = urlshort.slice(0, urlshort.length - 1);
   // console.log(getallurl);
-  const response = await fetch(getallurl, {method: "GET", headers: {'Content-Type': 'application/json', 'Authorization': 'a24fb077b67a5dedc043ac28afbea9c6'}});
+  const response = await fetch(getallurl, { method: "GET", headers: { 'Content-Type': 'application/json', 'Authorization': 'a24fb077b67a5dedc043ac28afbea9c6' } });
   getalllistsjson = await response.json();
   // console.log(getalllistsjson[0]._id);
   alllistsbox(getalllistsjson);
@@ -57,18 +57,18 @@ async function getalllists(listdel = false){
 
 }
 
-function testpardel(itemid){
+function testpardel(itemid) {
   delurl = urlshort + listid + "/items/" + itemid;
   postdata(delurl, {}, "DELETE");
 }
 
-function testparpos(){
+function testparpos() {
   var inputpostitemdata = document.getElementById("inputpostitem").value;
   if (inputpostitemdata == "") {
     //console.log = ("Leeres Eingabefeld")
   }
-  else{
-    inputpostitemdata = {"name": inputpostitemdata};
+  else {
+    inputpostitemdata = { "name": inputpostitemdata };
     //console.log(typeof(inputpostitemdata));
     posurl = urlshort + listid + "/items";
     postdata(posurl, inputpostitemdata, "POST");
@@ -76,115 +76,115 @@ function testparpos(){
   }
 }
 
-function testparput(itemid){
+function testparput(itemid) {
   var itemnr = idnrdict[itemid];
   var putitemdata;
-	getbought = getJson.items[itemnr].bought;
-	// console.log(typeof(getbought));
-	if (getbought) {
-		putitemdata = {"bought": "false"};
-	}
-	else {
-		putitemdata = {"bought": "true"};
-	}
+  getbought = getJson.items[itemnr].bought;
+  // console.log(typeof(getbought));
+  if (getbought) {
+    putitemdata = { "bought": "false" };
+  }
+  else {
+    putitemdata = { "bought": "true" };
+  }
   var puturl = urlshort + listid + "/items/" + itemid
   postdata(puturl, putitemdata, "PUT");
 }
 
-function bridgecreateaufruf(itemnr, jsoncontent){
-	var itemname = jsoncontent.items[itemnr].name;
-	var itembought = jsoncontent.items[itemnr].bought;
-	var itemid = jsoncontent.items[itemnr]._id;
+function bridgecreateaufruf(itemnr, jsoncontent) {
+  var itemname = jsoncontent.items[itemnr].name;
+  var itembought = jsoncontent.items[itemnr].bought;
+  var itemid = jsoncontent.items[itemnr]._id;
   idnrdict[itemid] = itemnr;
-	createaufruf(itembought, itemname, itemid, itemnr);
+  createaufruf(itembought, itemname, itemid, itemnr);
 }
 
 
-async function allitemget(jsoncontent){
+async function allitemget(jsoncontent) {
   delitemsbyparent("qrcodelistpic"); // vorhandenen QRCode löschen
   makingqrcode(urlshort + listid, "80", "90EE90", "qrcodelistpic");
   // *************** vorherigen Header löschen, falls vorhanden
   delitemsbyparent("listheader");
   // *************** Infos über die Liste als "Header" im body erstellen (inkl Löschbutton der Liste)
   var listheader = document.getElementById("listheader");
-    var spanlistid = document.createElement('li');
-      spanlistid.textContent = listid;
-    var spanemaillink = document.createElement('li');
-      var hyperlinklistid = document.createElement('a');
-        hyperlinklistid.textContent = "Share via Email";
-        hyperlinklistid.id = "si" + listid; // si --> span id (list)
-        hyperlinklistid.className = "buttontext";
-        hyperlinklistid.href= "mailto:pistolmn@gmx.de?subject=My shopping list (" + jsoncontent.name + ")&body=Hi there,%0D%0A %0D%0AI got great news for you! I created a shopping list which you can reach at the following adress: %0D%0A %0D%0A" + urlshort + listid;
-      spanemaillink.appendChild(hyperlinklistid);
-    var spanlistdel = document.createElement('li');
-      spanlistdel.id = "sd" + listid; // sd --> span delete
-      var butlistdel = document.createElement('button');
-        butlistdel.textContent = "Liste löschen";
-        butlistdel.id = "bd" + listid; // bd --> button delete
-        butlistdel.className = "buttontext";
-      spanlistdel.appendChild(butlistdel);
-    var spanlistcopy = document.createElement('li');
-      spanlistcopy.id = "sc" + listid; // sd --> span delete
-      var butlistcopy = document.createElement('button');
-        butlistcopy.textContent = "ID kopieren";
-        butlistcopy.id = "bc" + listid; // bd --> button delete
-        butlistcopy.className = "buttontext";
-        butlistcopy.addEventListener("click", function(){
-          const el = document.createElement('textarea');
-          el.value = listid;
-          document.body.appendChild(el);
-          el.select();
-          document.execCommand('copy');
-          document.body.removeChild(el);
-        })
-      spanlistcopy.appendChild(butlistcopy);
+  var spanlistid = document.createElement('li');
+  spanlistid.textContent = listid;
+  var spanemaillink = document.createElement('li');
+  var hyperlinklistid = document.createElement('a');
+  hyperlinklistid.textContent = "Share via Email";
+  hyperlinklistid.id = "si" + listid; // si --> span id (list)
+  hyperlinklistid.className = "buttontext";
+  hyperlinklistid.href = "mailto:pistolmn@gmx.de?subject=My shopping list (" + jsoncontent.name + ")&body=Hi there,%0D%0A %0D%0AI got great news for you! I created a shopping list which you can reach at the following adress: %0D%0A %0D%0A" + urlshort + listid;
+  spanemaillink.appendChild(hyperlinklistid);
+  var spanlistdel = document.createElement('li');
+  spanlistdel.id = "sd" + listid; // sd --> span delete
+  var butlistdel = document.createElement('button');
+  butlistdel.textContent = "Liste löschen";
+  butlistdel.id = "bd" + listid; // bd --> button delete
+  butlistdel.className = "buttontext";
+  spanlistdel.appendChild(butlistdel);
+  var spanlistcopy = document.createElement('li');
+  spanlistcopy.id = "sc" + listid; // sd --> span delete
+  var butlistcopy = document.createElement('button');
+  butlistcopy.textContent = "ID kopieren";
+  butlistcopy.id = "bc" + listid; // bd --> button delete
+  butlistcopy.className = "buttontext";
+  butlistcopy.addEventListener("click", function () {
+    const el = document.createElement('textarea');
+    el.value = listid;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+  })
+  spanlistcopy.appendChild(butlistcopy);
 
-    //QRCode Dialog
-    var qrdialog = document.getElementById('qrdialog');
-      var diasharewa = document.createElement('img');
-        diasharewa.alt = "Whatsapp teilen QrCode";
-        diasharewa.id = "wp" + listid;
-        // diasharewa.width = 100;
-      qrdialog.appendChild(diasharewa);
-      var abbrechbutt = document.createElement('button');
-        abbrechbutt.textContent = "Abbrechen";
-        abbrechbutt.className = "buttontext";
-        abbrechbutt.style.color = "white";
-        abbrechbutt.style.borderWidth = "5px";
-        abbrechbutt.style.float = "right";
-        // abbrechbutt.style.display = "absolute";
-        // abbrechbutt.style.top = "5em";
-        abbrechbutt.addEventListener("click", function(){
-          closedialog(qrdialog);
-        });
-      qrdialog.appendChild(abbrechbutt);
-    // QRCode Button
-    var spansharewa = document.createElement('li');
-      spansharewa.id = "wa" + listid;
-      var qrwabut = document.createElement('button');
-        qrwabut.id = "wb" + listid;
-        qrwabut.textContent = "Mit Whatsapp teilen";
-        qrwabut.className = "buttontext";
-        qrwabut.addEventListener("click", function(){
-          opendialog(document.getElementById("qrdialog"));
-        });
-      spansharewa.appendChild(qrwabut);
+  //QRCode Dialog
+  var qrdialog = document.getElementById('qrdialog');
+  var diasharewa = document.createElement('img');
+  diasharewa.alt = "Whatsapp teilen QrCode";
+  diasharewa.id = "wp" + listid;
+  // diasharewa.width = 100;
+  qrdialog.appendChild(diasharewa);
+  var abbrechbutt = document.createElement('button');
+  abbrechbutt.textContent = "Abbrechen";
+  abbrechbutt.className = "buttontext";
+  abbrechbutt.style.color = "white";
+  abbrechbutt.style.borderWidth = "5px";
+  abbrechbutt.style.float = "right";
+  // abbrechbutt.style.display = "absolute";
+  // abbrechbutt.style.top = "5em";
+  abbrechbutt.addEventListener("click", function () {
+    closedialog(qrdialog);
+  });
+  qrdialog.appendChild(abbrechbutt);
+  // QRCode Button
+  var spansharewa = document.createElement('li');
+  spansharewa.id = "wa" + listid;
+  var qrwabut = document.createElement('button');
+  qrwabut.id = "wb" + listid;
+  qrwabut.textContent = "Mit Whatsapp teilen";
+  qrwabut.className = "buttontext";
+  qrwabut.addEventListener("click", function () {
+    opendialog(document.getElementById("qrdialog"));
+  });
+  spansharewa.appendChild(qrwabut);
 
 
-    listheader.appendChild(spanlistdel);
-    listheader.appendChild(spanlistcopy);
-    listheader.appendChild(spanlistid);
-    listheader.appendChild(spanemaillink);
-    listheader.appendChild(spansharewa);
-    // document.getElementById("qrdialog").appendChild(qrdialog);
+  listheader.appendChild(spanlistdel);
+  listheader.appendChild(spanlistcopy);
+  listheader.appendChild(spanlistid);
+  listheader.appendChild(spanemaillink);
+  listheader.appendChild(spansharewa);
+  // document.getElementById("qrdialog").appendChild(qrdialog);
   generischEventlistenerlistdel(listid);
 
   //************* QR Code der Items
   var listitemsname = [];
-	for (var i = 0; i < jsoncontent.items.length; i++){
-		bridgecreateaufruf(i.toString(), jsoncontent);
+  for (var i = 0; i < jsoncontent.items.length; i++) {
+    bridgecreateaufruf(i.toString(), jsoncontent);
     listitemsname.push(jsoncontent.items[i].name);
-	}
+  }
 
   var allitemsplaintext = creatplaintextfromjson(jsoncontent, listitemsname);
 
@@ -194,12 +194,12 @@ async function allitemget(jsoncontent){
   var waplaintext = creatplaintextfromjson(jsoncontent, listitemsname, true);
   document.getElementById("wp" + listid).src = "http://api.qrserver.com/v1/create-qr-code/?data=https://api.whatsapp.com/send?text=" + waplaintext + "&size=500x500&ecc=h&color=FF0000&bgcolor=ADD8E6"
   var aktlistname = document.getElementsByClassName("aktlistname");
-  for (var i = 0; i < aktlistname.length; i++){
-    aktlistname[i].textContent =jsoncontent.name;
+  for (var i = 0; i < aktlistname.length; i++) {
+    aktlistname[i].textContent = jsoncontent.name;
   }
 }
 
-function creatplaintextfromjson(jsoncontent, listitemsname, washare = false){
+function creatplaintextfromjson(jsoncontent, listitemsname, washare = false) {
   var allitemsplaintext = "";
   if (listitemsname.length == 0) {
     allitemsplaintext = jsoncontent.name + ":%0A%0Anoch keine Items vorhanden";
@@ -242,24 +242,24 @@ function creatplaintextfromjson(jsoncontent, listitemsname, washare = false){
   return allitemsplaintext;
 }
 
-function generischEventlistenerlistdel(listid){
-	var listdeletebox = document.getElementById("bd" + listid);
-	listdeletebox.addEventListener("click", async function(){
+function generischEventlistenerlistdel(listid) {
+  var listdeletebox = document.getElementById("bd" + listid);
+  listdeletebox.addEventListener("click", async function () {
 
-      delitemsbyparent("qrcodelistpic"); //QRCode löschen
-      delitemsbyparent("qrcodeitemspic"); //QRCode löschen
-      postdata(urlshort + listid, {}, "DELETE", true);
-      console.log(listid);
-      delitemsbyparent("listlist");
-      setstartpage();
-      await Sleep(300); // Timer, da löschen auf dem Server einen Moment dauert
-      getalllists(true);
-      setstartpage();
-	});
+    delitemsbyparent("qrcodelistpic"); //QRCode löschen
+    delitemsbyparent("qrcodeitemspic"); //QRCode löschen
+    postdata(urlshort + listid, {}, "DELETE", true);
+    console.log(listid);
+    delitemsbyparent("listlist");
+    setstartpage();
+    await Sleep(300); // Timer, da löschen auf dem Server einen Moment dauert
+    getalllists(true);
+    setstartpage();
+  });
 }
 
 function Sleep(milliseconds) {
-   return new Promise(resolve => setTimeout(resolve, milliseconds));
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 //
 // function allitemsdel(){
@@ -273,65 +273,65 @@ function Sleep(milliseconds) {
 //   node.querySelectorAll('*').forEach(n => n.remove());
 // }
 
-function delitemsbyparent(parentid = ""){
+function delitemsbyparent(parentid = "") {
   // console.log("Listboxes werden gelöscht");
-  var node= document.getElementById(parentid);
+  var node = document.getElementById(parentid);
   node.querySelectorAll('*').forEach(n => n.remove());
 }
 
-function generischEventlistenercheck(itemid){
-	var checkbox = document.getElementById("ch" + itemid);
-	var checkboxvalue = checkbox.id;
-	checkbox.addEventListener("click", function(){
-			testparput(itemid);
-	});
+function generischEventlistenercheck(itemid) {
+  var checkbox = document.getElementById("ch" + itemid);
+  var checkboxvalue = checkbox.id;
+  checkbox.addEventListener("click", function () {
+    testparput(itemid);
+  });
 }
 
-function generischEventlistenerdel(itemid){
-	var deletebox = document.getElementById("de" + itemid);
-	var deleteboxvalue = deletebox.id;
-	deletebox.addEventListener("click", function(){
-			var itemid = deleteboxvalue.slice(2, deleteboxvalue.length);
-			testpardel(itemid);
-	});
+function generischEventlistenerdel(itemid) {
+  var deletebox = document.getElementById("de" + itemid);
+  var deleteboxvalue = deletebox.id;
+  deletebox.addEventListener("click", function () {
+    var itemid = deleteboxvalue.slice(2, deleteboxvalue.length);
+    testpardel(itemid);
+  });
 }
 
-function createaufruf(bought, itemname = "", itemid, itemnr){
+function createaufruf(bought, itemname = "", itemid, itemnr) {
   var tabitems = document.getElementById("createreturn");
-// ********* alle Items einer Liste im html erstellen (inkl buttons)
+  // ********* alle Items einer Liste im html erstellen (inkl buttons)
   var newrow = document.createElement('tr');
-    newrow.id = "row" + itemid;
-    newrow.className = "itemrows";
-		var newcell1 = document.createElement('td');
-			var newbutput = document.createElement('input');
-				newbutput.type = 'checkbox';
-				newbutput.id = "ch" + itemid;
-				newbutput.name = itemnr;
-				newbutput.className = "checkButton";
-				if (bought) {
-					newbutput.checked = true;
-				}
-				else {
-					newbutput.checked = false;
-				}
-				var newbutputlab = document.createElement('label');
-					newbutputlab.for = 'subscribeNews10';
-				newbutput.appendChild(newbutputlab);
-			newcell1.appendChild(newbutput);
-		newrow.appendChild(newcell1);
-		  newcell2 = document.createElement('td');
-			   newcell2.textContent = itemname;
-			      newcell2.className = "itemcontent";
-		newrow.appendChild(newcell2);
-		  newcell3 = document.createElement('td');
-  			newbutdel = document.createElement('button');
-  			newbutdel.textContent = "Löschen";
-  			newbutdel.id = "de" + itemid;
-  			newbutdel.className = "löschbutton";
-			newcell3.appendChild(newbutdel)
-		newrow.appendChild(newcell3);
-	tabitems.appendChild(newrow);
-	generischEventlistenercheck(itemid);
+  newrow.id = "row" + itemid;
+  newrow.className = "itemrows";
+  var newcell1 = document.createElement('td');
+  var newbutput = document.createElement('input');
+  newbutput.type = 'checkbox';
+  newbutput.id = "ch" + itemid;
+  newbutput.name = itemnr;
+  newbutput.className = "checkButton";
+  if (bought) {
+    newbutput.checked = true;
+  }
+  else {
+    newbutput.checked = false;
+  }
+  var newbutputlab = document.createElement('label');
+  newbutputlab.for = 'subscribeNews10';
+  newbutput.appendChild(newbutputlab);
+  newcell1.appendChild(newbutput);
+  newrow.appendChild(newcell1);
+  newcell2 = document.createElement('td');
+  newcell2.textContent = itemname;
+  newcell2.className = "itemcontent";
+  newrow.appendChild(newcell2);
+  newcell3 = document.createElement('td');
+  newbutdel = document.createElement('button');
+  newbutdel.textContent = "Löschen";
+  newbutdel.id = "de" + itemid;
+  newbutdel.className = "löschbutton";
+  newcell3.appendChild(newbutdel)
+  newrow.appendChild(newcell3);
+  tabitems.appendChild(newrow);
+  generischEventlistenercheck(itemid);
   generischEventlistenerdel(itemid);
 }
 
@@ -341,42 +341,42 @@ function createaufruf(bought, itemname = "", itemid, itemnr){
 //   }
 // }
 
-function alllistsbox(allitemsjson){
+function alllistsbox(allitemsjson) {
   for (var i = 0; i < allitemsjson.length; i++) {
     var listlist = document.getElementById("listlist");
     // var listid = "abc";
     newbox = document.createElement('li');
-      newbox.id = "li" + allitemsjson[i]._id;
-      // console.log(newbox.id)
-      newbox.className = "anotherlist";
-      newbox.textContent = allitemsjson[i].name;
-      newbox.style.backgroundColor = "lightgreen";
+    newbox.id = "li" + allitemsjson[i]._id;
+    // console.log(newbox.id)
+    newbox.className = "anotherlist";
+    newbox.textContent = allitemsjson[i].name;
+    newbox.style.backgroundColor = "lightgreen";
     listlist.appendChild(newbox);
     generischEventlistenerakt(allitemsjson[i]._id, allitemsjson[i]);
   }
 }
 
-function listboxbyid(allitemsjson){
+function listboxbyid(allitemsjson) {
   delitemsbyparent("listboxbyid");
   var listlist = document.getElementById("listboxbyid");
   // var listid = "abc";
   console.log("listboxbyid")
   newbox = document.createElement('li');
-    newbox.id = "il" + allitemsjson._id; // id "li" + itemid ist evtl schon vergeben
-    // console.log(newbox.id)
-    newbox.className = "anotherlist";
-    newbox.textContent = allitemsjson.name;
-    newbox.style.backgroundColor = "lightblue";
+  newbox.id = "il" + allitemsjson._id; // id "li" + itemid ist evtl schon vergeben
+  // console.log(newbox.id)
+  newbox.className = "anotherlist";
+  newbox.textContent = allitemsjson.name;
+  newbox.style.backgroundColor = "lightblue";
   listlist.appendChild(newbox);
   generischEventlistenerakt(allitemsjson._id, allitemsjson, true);
 }
 
-async function createnewlist(){
+async function createnewlist() {
   // console.log(newlistname);
   var getallurl = urlshort.slice(0, urlshort.length - 1);
   // console.log(getallurl);
   var newname = document.getElementById("idlistinput").value;
-  var newlistname = {"name": newname};
+  var newlistname = { "name": newname };
   // console.log(newlistname);
   const response = await fetch(getallurl, {
     method: "POST",
@@ -394,7 +394,7 @@ async function createnewlist(){
   getalllists();
 }
 
-function generischEventlistenerakt(listid, jsoncontent, getlistbyid = false){
+function generischEventlistenerakt(listid, jsoncontent, getlistbyid = false) {
   console.log("test")
   if (getlistbyid) {
     var listbox = document.getElementById("il" + listid);
@@ -402,7 +402,7 @@ function generischEventlistenerakt(listid, jsoncontent, getlistbyid = false){
   else {
     var listbox = document.getElementById("li" + listid);
   }
-  listbox.addEventListener("click", function(){
+  listbox.addEventListener("click", function () {
     // allitemsdel();
     console.log("imEventlistener");
     delitemsbyparent("createreturn");
@@ -422,12 +422,12 @@ function generischEventlistenerakt(listid, jsoncontent, getlistbyid = false){
   });
 }
 
-function opendialog(dialog){
+function opendialog(dialog) {
   document.getElementById("idlistinput").value = "";
   dialog.showModal();
 }
 
-function closedialog(dialog){
+function closedialog(dialog) {
   dialog.close();
 }
 
@@ -437,7 +437,7 @@ function closedialog(dialog){
 //   closedialog();
 // }
 
-function setstartpage(){
+function setstartpage() {
   // allitemsdel();
   delitemsbyparent("qrcodelistpic"); //QRCode löschen
   delitemsbyparent("qrcodeitemspic"); //QRCode löschen
@@ -447,7 +447,7 @@ function setstartpage(){
   defaultcontent.textContent = "Es wurde noch keine der Listen geladen.";
   document.getElementById("createreturn").appendChild(document.createElement('tr').appendChild(defaultcontent));
   var aktlistname = document.getElementsByClassName("aktlistname");
-  for (var i = 0; i < aktlistname.length; i++){
+  for (var i = 0; i < aktlistname.length; i++) {
     aktlistname[i].textContent = "Listen";
   }
   var def = document.getElementsByClassName("anotherlist");
@@ -456,18 +456,18 @@ function setstartpage(){
   };
 }
 
-async function getlistbyid(){
+async function getlistbyid() {
   setstartpage();
   var inputlistbyid = document.getElementById("inputlistbyid").value;
   console.log(inputlistbyid);
   urlgenerator(inputlistbyid, true);
 }
 
-function makingqrcode(codetext = "jo", length = "100", bgcolor = "FF0000", qrsection = "qrcodelistpic", color = "FF0000"){
+function makingqrcode(codetext = "jo", length = "100", bgcolor = "FF0000", qrsection = "qrcodelistpic", color = "FF0000") {
   var qrcodepicsection = document.getElementById(qrsection)
   var qrcodepic = document.createElement('img');
-    qrcodepic.src = "http://api.qrserver.com/v1/create-qr-code/?data=" + codetext + "&size=" + length + "x" + length + "&ecc=h&color=" + color + "&bgcolor=" + bgcolor;
-    qrcodepic.id = "qr" + qrsection;
+  qrcodepic.src = "http://api.qrserver.com/v1/create-qr-code/?data=" + codetext + "&size=" + length + "x" + length + "&ecc=h&color=" + color + "&bgcolor=" + bgcolor;
+  qrcodepic.id = "qr" + qrsection;
   qrcodepicsection.appendChild(qrcodepic);
 }
 //
@@ -476,22 +476,21 @@ function makingqrcode(codetext = "jo", length = "100", bgcolor = "FF0000", qrsec
 //   console.log("cache geleert");
 // }
 
-function hasWhiteSpace(s)
-{
-    var reWhiteSpace = new RegExp("%20");
+function hasWhiteSpace(s) {
+  var reWhiteSpace = new RegExp("%20");
 
-    // Check for white space
-    if (reWhiteSpace.test(s)) {
-        //alert("Please Check Your Fields For Spaces");
-        return false;
-    }
+  // Check for white space
+  if (reWhiteSpace.test(s)) {
+    //alert("Please Check Your Fields For Spaces");
+    return false;
+  }
 
-    return true;
+  return true;
 }
 
 // Onload bzgl EventListener
 
-window.onload = function() {
+window.onload = function () {
   urlshort = 'http://shopping-lists-api.herokuapp.com/api/v1/lists/';
   urlgenerator('5dc0779cb1366200179dc911');
   getalllists();
@@ -500,7 +499,7 @@ window.onload = function() {
   postrequest.addEventListener("click", testparpos);
 
   var inputposenter = document.getElementById("inputpostitem");
-  inputposenter.addEventListener("keydown", function(event) {
+  inputposenter.addEventListener("keydown", function (event) {
     if (event.keyCode == 13) {
       testparpos();
     }
@@ -509,7 +508,7 @@ window.onload = function() {
   checkBox = document.getElementById("subscribeNews6");
 
   var listidpost = document.getElementById("listidpost");
-  listidpost.addEventListener("click", function(){
+  listidpost.addEventListener("click", function () {
     createnewlist();
   })
 
@@ -519,23 +518,23 @@ window.onload = function() {
   banner.addEventListener("click", setstartpage)
 
   var listinputstop = document.getElementById("listinputstop");
-  listinputstop.addEventListener("click", function(){
+  listinputstop.addEventListener("click", function () {
     closedialog(sidedialog);
   });
 
   var startdialog = document.getElementById("startdialog");
-  startdialog.addEventListener("click", function(){
+  startdialog.addEventListener("click", function () {
     opendialog(sidedialog);
   });
 
   sidedialog = document.getElementById("dialogbox");
 
   var idlistinput = document.getElementById("idlistinput");
-  idlistinput.addEventListener("click", function(){
-     idlistinput.value = "";
+  idlistinput.addEventListener("click", function () {
+    idlistinput.value = "";
   });
 
-  idlistinput.addEventListener("keydown", function(event) {
+  idlistinput.addEventListener("keydown", function (event) {
     if (event.keyCode == 13) {
       createnewlist();
     }
@@ -554,11 +553,11 @@ window.onload = function() {
   butlistbyid.addEventListener("click", getlistbyid);
 
   var inputlistbyid = document.getElementById("inputlistbyid");
-  inputlistbyid.addEventListener("click", function(){
-     inputlistbyid.value = "";
+  inputlistbyid.addEventListener("click", function () {
+    inputlistbyid.value = "";
   });
 
-  inputlistbyid.addEventListener("keydown", function(event) {
+  inputlistbyid.addEventListener("keydown", function (event) {
     if (event.keyCode == 13) {
       getlistbyid();
     }

@@ -27,15 +27,6 @@ html,body{
 }
 
 @media (max-width: 640px) {
-  /* .grid {
-    grid-template-columns: minmax(0, 0) auto;
-  }
-  #Banner{
-    visibility: hidden;
-  }
-  .side{
-    display: none;
-  } */
   .grid{
     grid-template-columns: 0 auto;
     grid-template-rows: 150px min-content min-content min-content min-content;
@@ -50,28 +41,15 @@ html,body{
     visibility: hidden;
   }
 
-  /* #Listennamediv{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  } */
-
   .inhalt{
     width: 94%;
-    /* margin-top: 450px;
-    bottom: min-content; */
-
   }
   .side{
     width: 94%;
     margin-right: 2%;
-    /* top: 150px;
-    bottom: min-content; */
   }
   .footer{
     width: 94%;
-    /* top: 1fr;
-    bottom: 0; */
   }
   #qrqrcodelistpic{
     width: 0;
@@ -100,10 +78,11 @@ html,body{
   border-radius: 15px;
   grid-area: side;
   padding: 0 0.3em 0 0.3em;
-  margin-left: 2%;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-bottom: 1%;
   background-color: lightgrey;
   border: 2px solid black;
-  /* position: relative; */
 }
 
 .pic{
@@ -112,11 +91,12 @@ html,body{
 }
 
 .inhalt{
+  size: 98%;
   padding: 0 0.3em 1em 0.3em;
   border: 3px solid antiquewhite;
   border-radius: 15px;
-  margin-left: 2%;
-  margin-right: 2%;
+  margin-left: 1%;
+  margin-right: 1%;
   grid-area: inhalt;
   font-size: 0.875em;
   line-height: 1.6;
@@ -233,15 +213,6 @@ input{
   cursor: default;
 }
 
-/* li button{
-  width: 100%;
-  text-align: left;
-} */
-/*
-.inhalt h1{
-  padding-bottom: 170px;
-} */
-
 .itemcontent{
   border: 1px solid black;
   /* list-style-type: none; */
@@ -262,7 +233,7 @@ input{
   background-color: yellow;
 }
 
-/*--------------------------------------*/
+/*-----------DIALOG----------------*/
 
 
 dialog {
@@ -317,7 +288,7 @@ dialog #close-dialog {
   outline: 0;
 }
 
-/*------------------------------------*/
+/*--------BUTTON--------------*/
 
 button {
   background: transparent;
