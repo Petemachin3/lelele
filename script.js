@@ -161,7 +161,7 @@ async function allitemget(jsoncontent){
   var allitemsplaintext = creatplaintextfromjson(jsoncontent, listitemsname);
 
   delitemsbyparent("qrcodeitemspic"); //vorhandenen QRCode löschen
-  makingqrcode(allitemsplaintext, "120", "ADD8E6", "qrcodeitemspic");
+  makingqrcode(allitemsplaintext, "120", "D3D3D3", "qrcodeitemspic", "000000");
 
   var waplaintext = creatplaintextfromjson(jsoncontent, listitemsname, true);
   document.getElementById("wp" + listid).src = "http://api.qrserver.com/v1/create-qr-code/?data=https://api.whatsapp.com/send?text=" + waplaintext + "&size=100x100&ecc=h&color=FF0000&bgcolor=ADD8E6"
@@ -417,10 +417,10 @@ async function getlistbyid(){
   urlgenerator(inputlistbyid, true);
 }
 
-function makingqrcode(codetext = "jo", length = "100", bgcolor = "FF0000", qrsection = "qrcodelistpic"){
+function makingqrcode(codetext = "jo", length = "100", bgcolor = "FF0000", qrsection = "qrcodelistpic", color = "FF0000"){
   var qrcodepicsection = document.getElementById(qrsection)
   var qrcodepic = document.createElement('img');
-    qrcodepic.src = "http://api.qrserver.com/v1/create-qr-code/?data=" + codetext + "&size=" + length + "x" + length + "&ecc=h&color=FF0000&bgcolor=" + bgcolor;
+    qrcodepic.src = "http://api.qrserver.com/v1/create-qr-code/?data=" + codetext + "&size=" + length + "x" + length + "&ecc=h&color=" + color + "&bgcolor=" + bgcolor;
   qrcodepicsection.appendChild(qrcodepic);
 }
 //
@@ -502,8 +502,5 @@ window.onload = function() {
   });
 
   sideopen = true;
-
-  var buttonside = document.getElementById("buttonside");
-  buttonside.addEventListener("click", sidetoggle)
 
 }
