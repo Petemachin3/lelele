@@ -8,14 +8,53 @@ function urlgenerator(newlistid, listbyid = false) {
 }
 
 async function apiabfrage(url, listbyid) {
-  const response = await fetch(url);
-  getJson = await response.json();
-  // c = JSON.stringify(getJson);
+  try {
+    const response = await fetch(url);
+    getJson = await response.json();
 
-  allitemget(getJson);
-  if (listbyid) {
-    listboxbyid(getJson);
+    allitemget(getJson);
+    if (listbyid) {
+      listboxbyid(getJson);
+    }
+  } catch (e) {
+    var secdialog = document.getElementById("secdialog");
+    var qrdialog = document.createElement('dialog');
+      qrdialog.className = "qrdialog";
+      qrdialog.id = "da";
+    var textcode = document.createElement('h2');
+    textcode.textContent = "Du bist gestrandet:";
+    textcode.style.margin = "2px";
+    textcode.style.borderRadius = "5px";
+    textcode.style.backgroundColor = "#ADD8E6";
+    textcode.style.padding = "5px";
+    var textcodenewline = document.createElement('h3');
+    textcodenewline.textContent = e;
+    textcode.appendChild(textcodenewline);
+    qrdialog.appendChild(textcode);
+    var diasharewa = document.createElement('img');
+    diasharewa.alt = "Whatsapp teilen QrCode";
+    diasharewa.id = "ap";
+    diasharewa.style.borderRadius = "5px";
+    diasharewa.src = "https://t4.ftcdn.net/jpg/00/02/46/83/500_F_2468300_PczW2Yq9Wgq9I6GYrAx7H5kthMnx7m.jpg"
+    diasharewa.className = "waqrcode";
+    qrdialog.appendChild(diasharewa);
+    var abbrechbutt = document.createElement('button');
+    abbrechbutt.textContent = "Fenster schließen";
+    abbrechbutt.className = "buttontext";
+    abbrechbutt.style.marginTop = "10px";
+    abbrechbutt.style.float = "right";
+    abbrechbutt.style.borderWidth = "5px";
+    abbrechbutt.style.fontWeight = "700";
+    abbrechbutt.style.backgroundColor = "#ADD8E6";
+    abbrechbutt.addEventListener("click", function () {
+      // delitemsbyparent("qrdialogsec"); //QRCode löschen
+      closedialog(qrdialog);
+    });
+    qrdialog.appendChild(abbrechbutt);
+    secdialog.appendChild(qrdialog);
+    opendialog(qrdialog);
   }
+
 }
 
 async function postdata(url = '', data = {}, requesttype = '', deletelist = false) {
@@ -236,7 +275,6 @@ function creatplaintextfromjson(jsoncontent, listitemsname, washare = false) {
 
   }
 
-  console.log(allitemsplaintext);
   return allitemsplaintext;
 }
 
