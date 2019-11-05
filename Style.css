@@ -432,7 +432,7 @@ h1{
   /* border-width: thick;  */
 }
 
-#qrdialog{
+.qrdialog{
   padding: 0;
   background: transparent;
   width: 40%;

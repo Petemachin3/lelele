@@ -127,18 +127,25 @@ async function allitemget(jsoncontent) {
   spanlistcopy.appendChild(butlistcopy);
 
   //QRCode Dialog
-  var qrdialog = document.getElementById('qrdialog');
+  // var qrdialog = document.getElementById('qrdialog');
+  var secdialog = document.getElementById("secdialog");
+  var qrdialog = document.createElement('dialog');
+    qrdialog.className = "qrdialog";
+    qrdialog.id = "di" + listid;
   var diasharewa = document.createElement('img');
   diasharewa.alt = "Whatsapp teilen QrCode";
   diasharewa.id = "wp" + listid;
   diasharewa.className = "waqrcode";
   qrdialog.appendChild(diasharewa);
-  var abbrechbutt = document.getElementById('abbbuttqrwa');
+  var abbrechbutt = document.createElement('button');
+  abbrechbutt.textContent = "Fenster schließen";
+  abbrechbutt.className = "buttontext";
   abbrechbutt.addEventListener("click", function () {
-    delitemsbyparent("qrdialogsec"); //QRCode löschen
-    closedialog(document.getElementById("qrdialog"));
+    // delitemsbyparent("qrdialogsec"); //QRCode löschen
+    closedialog(qrdialog);
   });
   qrdialog.appendChild(abbrechbutt);
+  secdialog.appendChild(qrdialog);
   // QRCode Button
   var spansharewa = document.createElement('li');
   spansharewa.id = "wa" + listid;
@@ -147,7 +154,7 @@ async function allitemget(jsoncontent) {
   qrwabut.textContent = "Mit Whatsapp teilen";
   qrwabut.className = "buttontext";
   qrwabut.addEventListener("click", function () {
-    opendialog(document.getElementById("qrdialog"));
+    opendialog(qrdialog);
   });
   spansharewa.appendChild(qrwabut);
 
@@ -175,7 +182,7 @@ async function allitemget(jsoncontent) {
   makingqrcode(allitemsplaintext, "120", "D3D3D3", "qrcodeitemspic", "000000");
 
   var waplaintext = creatplaintextfromjson(jsoncontent, listitemsname, true);
-  document.getElementById("wp" + listid).src = "http://api.qrserver.com/v1/create-qr-code/?data=https://api.whatsapp.com/send?text=" + waplaintext + "&size=500x500&ecc=h&color=FF0000&bgcolor=ADD8E6"
+  diasharewa.src = "http://api.qrserver.com/v1/create-qr-code/?data=https://api.whatsapp.com/send?text=" + waplaintext + "&size=500x500&ecc=h&color=FF0000&bgcolor=ADD8E6"
   var aktlistname = document.getElementsByClassName("aktlistname");
   for (var i = 0; i < aktlistname.length; i++) {
     aktlistname[i].textContent = jsoncontent.name;
@@ -201,7 +208,7 @@ function creatplaintextfromjson(jsoncontent, listitemsname, washare = false) {
       else {
         var itemchecked = "";
       }
-      listitemsname[i] = listitemsname[i].replace(/ /g, "spacechar");
+      listitemsname[i] = listitemsname[i].replace(/ /g, spacechar);
       allitemsplaintext += itemchecked + listitemsname[i] + itemchecked + "%0A"; // Formatierung der Items im QR
     }
     else {
@@ -234,7 +241,7 @@ function generischEventlistenerlistdel(listid) {
 
     delitemsbyparent("qrcodelistpic"); //QRCode löschen
     delitemsbyparent("qrcodeitemspic"); //QRCode löschen
-    delitemsbyparent("qrdialogsec"); //QRCode löschen
+    // delitemsbyparent("qrdialogsec"); //QRCode löschen
     postdata(urlshort + listid, {}, "DELETE", true);
     delitemsbyparent("listlist");
     setstartpage();
