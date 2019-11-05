@@ -113,6 +113,7 @@ async function allitemget(jsoncontent){
       var hyperlinklistid = document.createElement('a');
         hyperlinklistid.textContent = "Share via Email";
         hyperlinklistid.id = "si" + listid; // si --> span id (list)
+        hyperlinklistid.className = "buttontext";
         hyperlinklistid.href= "mailto:pistolmn@gmx.de?subject=My shopping list (" + jsoncontent.name + ")&body=Hi there,%0D%0A %0D%0AI got great news for you! I created a shopping list which you can reach at the following adress: %0D%0A %0D%0A" + urlshort + listid;
       spanemaillink.appendChild(hyperlinklistid);
     var spanlistdel = document.createElement('li');
@@ -137,18 +138,42 @@ async function allitemget(jsoncontent){
           document.body.removeChild(el);
         })
       spanlistcopy.appendChild(butlistcopy);
+
+    //QRCode Dialog
+    var qrdialog = document.getElementById('qrdialog');
+      var diasharewa = document.createElement('img');
+        diasharewa.alt = "Whatsapp teilen QrCode";
+        diasharewa.id = "wp" + listid;
+        // diasharewa.width = 100;
+      qrdialog.appendChild(diasharewa);
+      var abbrechbutt = document.createElement('button');
+        abbrechbutt.textContent = "Abbrechen";
+        abbrechbutt.className = "buttontext";
+        // abbrechbutt.style.display = "absolute";
+        abbrechbutt.style.top = "5em";
+        abbrechbutt.addEventListener("click", function(){
+          closedialog(qrdialog);
+        });
+      qrdialog.appendChild(abbrechbutt);
+    // QRCode Button
     var spansharewa = document.createElement('li');
       spansharewa.id = "wa" + listid;
-      var qrwapic = document.createElement('img');
-        qrwapic.alt = "Whatsapp teilen QrCode";
-        qrwapic.id = "wp" + listid;
-      spansharewa.appendChild(qrwapic);
+      var qrwabut = document.createElement('button');
+        qrwabut.id = "wb" + listid;
+        qrwabut.textContent = "Mit Whatsapp teilen";
+        qrwabut.className = "buttontext";
+        qrwabut.addEventListener("click", function(){
+          opendialog(document.getElementById("qrdialog"));
+        });
+      spansharewa.appendChild(qrwabut);
+
 
     listheader.appendChild(spanlistdel);
     listheader.appendChild(spanlistcopy);
     listheader.appendChild(spanlistid);
     listheader.appendChild(spanemaillink);
     listheader.appendChild(spansharewa);
+    // document.getElementById("qrdialog").appendChild(qrdialog);
   generischEventlistenerlistdel(listid);
 
   //************* QR Code der Items
@@ -164,7 +189,7 @@ async function allitemget(jsoncontent){
   makingqrcode(allitemsplaintext, "120", "D3D3D3", "qrcodeitemspic", "000000");
 
   var waplaintext = creatplaintextfromjson(jsoncontent, listitemsname, true);
-  document.getElementById("wp" + listid).src = "http://api.qrserver.com/v1/create-qr-code/?data=https://api.whatsapp.com/send?text=" + waplaintext + "&size=100x100&ecc=h&color=FF0000&bgcolor=ADD8E6"
+  document.getElementById("wp" + listid).src = "http://api.qrserver.com/v1/create-qr-code/?data=https://api.whatsapp.com/send?text=" + waplaintext + "&size=500x500&ecc=h&color=FF0000&bgcolor=ADD8E6"
   var aktlistname = document.getElementsByClassName("aktlistname");
   for (var i = 0; i < aktlistname.length; i++){
     aktlistname[i].textContent =jsoncontent.name;
@@ -361,7 +386,7 @@ async function createnewlist(){
   var getalllistsjson = await response.json();
   // console.log(getalllistsjson._id);
   urlgenerator(getalllistsjson._id);
-  closedialog();
+  closedialog(sidedialog);
   delitemsbyparent("listlist");
   getalllists();
 }
@@ -394,12 +419,12 @@ function generischEventlistenerakt(listid, jsoncontent, getlistbyid = false){
   });
 }
 
-function opendialog(){
+function opendialog(dialog){
   document.getElementById("idlistinput").value = "";
   dialog.showModal();
 }
 
-function closedialog(){
+function closedialog(dialog){
   dialog.close();
 }
 
@@ -491,12 +516,16 @@ window.onload = function() {
   banner.addEventListener("click", setstartpage)
 
   var listinputstop = document.getElementById("listinputstop");
-  listinputstop.addEventListener("click", closedialog);
+  listinputstop.addEventListener("click", function(){
+    closedialog(sidedialog);
+  });
 
   var startdialog = document.getElementById("startdialog");
-  startdialog.addEventListener("click", opendialog);
+  startdialog.addEventListener("click", function(){
+    opendialog(sidedialog);
+  });
 
-  dialog = document.getElementById("dialogbox");
+  sidedialog = document.getElementById("dialogbox");
 
   var idlistinput = document.getElementById("idlistinput");
   idlistinput.addEventListener("click", function(){

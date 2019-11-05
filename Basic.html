@@ -19,19 +19,6 @@
           <ul>
             <li id="Überschrift">Liste erstellen
               <button id="startdialog" class="plusbutton"><img id="dialogplus" src="Bilder/hinzufügen.png" alt="hinzufügen"></button>
-              <dialog id="dialogbox">
-                <h2>Liste erstellen</h2>
-                <p>
-                   <label id="labelidlistinput" for="idlistinput">Bitte geben Sie den Namen der neuen Liste ein:</label>
-                </p>
-                <p>
-                  <input id="idlistinput" type="text" placeholder="Name der neuen Liste">
-                </p>
-                <p>
-                  <button id="listidpost" class="buttontext">Liste hinzufügen</button>
-                  <button id="listinputstop" class="buttontext">Abbrechen</button>
-                </p>
-              </dialog>
             </li>
             <section id="listlist">
 
@@ -84,5 +71,23 @@
       </div>
     </div>
   </body>
+
+  <dialog id="qrdialog">
+  </dialog>
+
+
+  <dialog id="dialogbox">
+    <h2>Liste erstellen</h2>
+    <p>
+       <label id="labelidlistinput" for="idlistinput">Bitte geben Sie den Namen der neuen Liste ein:</label>
+    </p>
+    <p>
+      <input id="idlistinput" type="text" placeholder="Name der neuen Liste">
+    </p>
+    <p>
+      <button id="listidpost" class="buttontext">Liste hinzufügen</button>
+      <button id="listinputstop" class="buttontext">Abbrechen</button>
+    </p>
+  </dialog>
 
 </html>
