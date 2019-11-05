@@ -109,7 +109,7 @@ html,body{
 }
 
 .inhalt{
-  padding: 0 0.3em 0 0.3em;
+  padding: 0 0.3em 1em 0.3em;
   border: 3px solid antiquewhite;
   border-radius: 15px;
   margin-left: 2%;
@@ -170,7 +170,7 @@ html,body{
 
 input{
   outline: none;
-  margin: 0.5em;
+  margin-bottom: 0.5em;
   list-style-type: none;
   border: 1px solid black;
   border-radius: 5px;
@@ -347,6 +347,7 @@ button {
   margin-left: auto;
   margin-right: auto;
   display: block;
+  text-align: center;
 }
 
 #postrequest{
@@ -403,6 +404,7 @@ button {
   margin-left: auto;
   margin-right: auto;
   display: block;
+  text-align: center;
 }
 
 #butlistbyid{
@@ -427,8 +429,8 @@ button {
 }
 
 .side dialog {
-  margin-left: 25%;
-  margin-right: 25%;
+  margin-left: auto;
+  margin-right: auto;
 	display: none;
 	position: fixed;
 	background: white;
