@@ -236,27 +236,12 @@ input{
 /*-----------DIALOG----------------*/
 
 
-dialog {
-  padding-left: 50%;
-	display: none;
-	position: relative;
-	/* background: white; */
-	border: 1px solid grey;
-	border-radius: 0.5em;
-	/* z-index: 1002; */
-	width: 100%;
-	height: auto;
-}
-
 dialog[open="open"] {
 	display: block;
 }
 
 dialog {
   overflow: visible;
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
   padding-left: 2em;
   padding-right: 2em;
 }
@@ -400,12 +385,15 @@ dialog {
   margin-right: auto;
 	display: none;
 	position: fixed;
+  top: 5em;
   background-image: url("https://www.tripsavvy.com/thmb/yxjGrrLo1biiyLzvDEGSPBKfbj0=/624x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/152316403-56a0069f5f9b58eba4ae8be6.jpg");
 	border: 1px solid grey;
 	border-radius: 0.5em;
 	z-index: 1002;
 	width: 50%;
-	height: auto;
+  max-width: 560px;
+  height: 40%;
+  max-height: 210px;
 }
 
 dialog[open] {

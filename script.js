@@ -101,7 +101,7 @@ async function allitemget(jsoncontent) {
   hyperlinklistid.textContent = "Share via Email";
   hyperlinklistid.id = "si" + listid; // si --> span id (list)
   hyperlinklistid.className = "buttontext";
-  hyperlinklistid.href = "mailto:pistolmn@gmx.de?subject=My shopping list (" + jsoncontent.name + ")&body=Hi there,%0D%0A %0D%0AI got great news for you! I created a shopping list which you can reach at the following adress: %0D%0A %0D%0A" + urlshort + listid;
+  hyperlinklistid.href = "mailto:pistolmn@gmx.de?subject=My shopping list (" + jsoncontent.name + ")&body=Hi there,%0D%0A %0D%0AI got great news for you! I created a shopping list which you can reach at the following adress: %0D%0A %0D%0A" + urlshort + listid + " %0D%0A %0D%0AWe hope you'll enjoy our site, cheers!";
   spanemaillink.appendChild(hyperlinklistid);
   var spanlistdel = document.createElement('li');
   spanlistdel.id = "sd" + listid; // sd --> span delete
@@ -140,6 +140,10 @@ async function allitemget(jsoncontent) {
   var abbrechbutt = document.createElement('button');
   abbrechbutt.textContent = "Fenster schließen";
   abbrechbutt.className = "buttontext";
+  abbrechbutt.style.marginTop = "10px";
+  abbrechbutt.style.float = "right";
+  abbrechbutt.style.borderWidth = "5px";
+  abbrechbutt.style.fontWeight = "700";
   abbrechbutt.addEventListener("click", function () {
     // delitemsbyparent("qrdialogsec"); //QRCode löschen
     closedialog(qrdialog);
@@ -443,7 +447,7 @@ function makingqrcode(codetext = "jo", length = "100", bgcolor = "6000FF", qrsec
 
 window.onload = function () {
   urlshort = 'http://shopping-lists-api.herokuapp.com/api/v1/lists/';
-  urlgenerator('5dc19238bbc1f70017c2fee2');
+  urlgenerator('5dc0779cb1366200179dc911');
   getalllists();
 
   var postrequest = document.getElementById("postrequest");
