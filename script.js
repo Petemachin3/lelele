@@ -421,6 +421,7 @@ function makingqrcode(codetext = "jo", length = "100", bgcolor = "FF0000", qrsec
   var qrcodepicsection = document.getElementById(qrsection)
   var qrcodepic = document.createElement('img');
     qrcodepic.src = "http://api.qrserver.com/v1/create-qr-code/?data=" + codetext + "&size=" + length + "x" + length + "&ecc=h&color=" + color + "&bgcolor=" + bgcolor;
+    qrcodepic.id = "qr" + qrsection;
   qrcodepicsection.appendChild(qrcodepic);
 }
 //
@@ -501,6 +502,7 @@ window.onload = function() {
     }
   });
 
-  sideopen = true;
-
+  // var responsivewin = window.matchMedia("(max-width: 640px)")
+  // responsiveset(responsivewin);
+  // responsivewin.addListener(responsiveset);
 }

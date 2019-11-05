@@ -48,7 +48,6 @@ html,body{
   }
   #Banner{
     visibility: hidden;
-
   }
 
   /* #Listennamediv{
@@ -74,8 +73,8 @@ html,body{
     /* top: 1fr;
     bottom: 0; */
   }
-  #spanlistheader{
-    grid-area: inhaltfooter;
+  #qrqrcodelistpic{
+    width: 0;
   }
 }
 
@@ -454,8 +453,8 @@ h1{
   margin: 10px;
 }
 
-#qrcodelistpic{
-  margin: 10px;
+#qrqrcodelistpic{
+  padding: 10px;
 }
 
 #qrcodeitemspic{
