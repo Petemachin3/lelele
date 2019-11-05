@@ -388,12 +388,19 @@ button {
   transform:scale(1.3);
 }
 
+.waqrcode{
+  width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 dialog {
   margin-left: auto;
   margin-right: auto;
 	display: none;
 	position: fixed;
-	background: white;
+  background-image: url("https://www.tripsavvy.com/thmb/yxjGrrLo1biiyLzvDEGSPBKfbj0=/624x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/152316403-56a0069f5f9b58eba4ae8be6.jpg");
 	border: 1px solid grey;
 	border-radius: 0.5em;
 	z-index: 1002;
@@ -427,8 +434,14 @@ h1{
 
 #qrdialog{
   padding: 0;
-  /* background: rgba(0, 0, 0, 0.5); */
   background: transparent;
-  width: 500px;
+  width: 40%;
   border: none;
+}
+
+#abbbuttqrwa{
+  border-width: 5px;
+  float: right;
+  color: white;
+  margin-top: 5px;
 }
