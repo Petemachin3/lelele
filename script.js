@@ -429,6 +429,7 @@ function makingqrcode(codetext = "jo", length = "100", bgcolor = "FF0000", qrsec
 //   console.log("cache geleert");
 // }
 
+
 // Onload bzgl EventListener
 
 window.onload = function() {
@@ -499,5 +500,10 @@ window.onload = function() {
       getlistbyid();
     }
   });
+
+  sideopen = true;
+
+  var buttonside = document.getElementById("buttonside");
+  buttonside.addEventListener("click", sidetoggle)
 
 }

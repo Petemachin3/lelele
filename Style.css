@@ -11,7 +11,7 @@ html,body{
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: minmax(0, 20%) auto;
+  grid-template-columns: minmax(200px, 20%) auto;
   grid-template-rows: min-content min-content min-content;
   grid-template-areas:
     "header headerlistname"
@@ -26,8 +26,8 @@ html,body{
   background-color: lightgreen;
 }
 
-@media (max-width: 900px) {
-  .grid {
+@media (max-width: 640px) {
+  /* .grid {
     grid-template-columns: minmax(0, 0) auto;
   }
   #Banner{
@@ -35,6 +35,46 @@ html,body{
   }
   .side{
     display: none;
+  } */
+  .grid{
+    grid-template-columns: 170px auto;
+    grid-template-rows: min-content min-content min-content min-content min-content;
+    grid-template-areas:
+    "header headerlistname"
+    "side side"
+    "inhalt inhalt"
+    "inhaltfooter inhaltfooter"
+    "footer footer"
+  }
+  #Banner{
+    padding-left: 10px;
+  }
+  /* .header, .inhalt, .side, .footer{
+    position: absolute;
+  } */
+  /* .header{
+    top: 0;
+    bottom: auto;
+  } */
+  .inhalt{
+    width: 94%;
+    /* margin-top: 450px;
+    bottom: min-content; */
+
+  }
+  .side{
+    width: 94%;
+    margin-right: 2%;
+    /* top: 150px;
+    bottom: min-content; */
+  }
+  .footer{
+    width: 94%;
+    /* top: 1fr;
+    bottom: 0; */
+  }
+  #spanlistheader{
+    grid-area: inhaltfooter;
   }
 }
 
@@ -52,10 +92,10 @@ html,body{
   border-radius: 15px;
   grid-area: side;
   padding: 0 0.3em 0 0.3em;
-  margin-left: 5px;
+  margin-left: 2%;
   background-color: lightgrey;
   border: 2px solid black;
-  position: relative;
+  /* position: relative; */
 }
 
 .pic{
@@ -64,15 +104,19 @@ html,body{
 }
 
 .inhalt{
-  padding: 20px;
+  padding: 0 0.3em 0 0.3em;
   border: 3px solid antiquewhite;
   border-radius: 15px;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 2%;
+  margin-right: 2%;
   grid-area: inhalt;
   font-size: 0.875em;
   line-height: 1.6;
   background-color: lightblue;
+}
+
+.inhalt div{
+  padding: 20px;
 }
 
 .inhalt ul li{
@@ -116,6 +160,7 @@ html,body{
   border: 1px solid black;
   border-radius: 5px;
   padding: 7px;
+  overflow: hidden;
 }
 
 input{
@@ -162,7 +207,7 @@ input{
 }
 
 #Banner button{
-  padding-left: 30px;
+  padding-left: 40px;
 }
 
 
@@ -184,13 +229,33 @@ input{
   cursor: default;
 }
 
+/* li button{
+  width: 100%;
+  text-align: left;
+} */
+/*
+.inhalt h1{
+  padding-bottom: 170px;
+} */
+
+.itemcontent{
+  border: 1px solid black;
+  /* list-style-type: none; */
+  border-radius: 5px;
+  width: 200px;
+  height: content-minimum;
+  border: 1px solid black;
+  padding: 5px;
+  margin-right: 8px;
+  margin-top: 5px;
+}
 
 .löschbutton{
   border: 1px solid black;
   border-radius: 5px;
   width: 100px;
   height: content-minimum;
-  background-color: lightcoral;
+  background-color: yellow;
 }
 
 /*--------------------------------------*/
@@ -276,68 +341,11 @@ button {
   outline-style: none;
 }
 
-.itemcontent{
-  border: 1px solid black;
-  border-radius: 5px;
-  width: 100%;
-  height: content-minimum;
-  border: 1px solid black;
-  padding: 5px;
-  margin-right: 8px;
-  word-break: break-all;
-}
-
-
-#createreturn{
-  min-width: 400px;
-  width: 70%;
-  padding-left: 50px;
-  float: left;
-}
-
-#spanlistheader{
-  width: 30%;
-  padding: 0;
-  float: right;
-}
-
-
 #inputpostitem{
-  width: 237px;
-  margin-left: 90px;
+  padding-left: 20px;
+  width: 40%;
 }
 
-#listheader{
-  padding: 0;
-}
-
-#listheader li{
-  margin: 1em;
-  border: none;
-  text-align: center;
-}
-
-
-@media (max-width: 900px){
-  #spanlistheader{
-    text-align: center;
-    float: left;
-    margin-left: 22%;
-  }
-
-  #createreturn{
-    padding: 0;
-    width: 90%;
-  }
-  #inputpostitem{
-    margin-left: 40px;
-  }
-}
-
-
-#postrequest{
-  bottom: 0;
-}
 
 #startbild{
   height: 35px;
@@ -350,10 +358,23 @@ button {
   float: right;
 }
 
-input[type="checkbox"]{
-  vertical-align: middle;
-  width: 20px;
-  height: 20px;
+#spanlistheader{
+  padding: 0;
+  float: right;
+}
+
+
+#listheader li{
+  margin: 1em;
+  border: none;
+  text-align: center;
+}
+
+#createreturn{
+  padding-left: 50px;
+  margin: 0;
+  float: left;
+  display: run-in;
 }
 
 #inputlistbyid{
@@ -415,4 +436,8 @@ h1{
 #qrcodeitemspic{
   text-align: center;
   margin: 10px;
+}
+
+#buttonside{
+  font-size: 40px;
 }
