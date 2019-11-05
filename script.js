@@ -359,12 +359,6 @@ function createaufruf(bought, itemname = "", itemid, itemnr) {
   generischEventlistenerdel(itemid);
 }
 
-// function alllistsbox(allitemsjson){
-//   for (var i = 1; i < allitemsjson.length; i++) {
-//     createlistbuttonbox(allitemsjson[i]._id, allitemsjson[i].name)
-//   }
-// }
-
 function alllistsbox(allitemsjson) {
   for (var i = 0; i < allitemsjson.length; i++) {
     var listlist = document.getElementById("listlist");
@@ -486,7 +480,7 @@ function makingqrcode(codetext = "jo", length = "100", bgcolor = "000000", qrsec
 
 window.onload = function () {
   urlshort = 'http://shopping-lists-api.herokuapp.com/api/v1/lists/';
-  urlgenerator('5dc0779cb1366200179dc911');
+  urlgenerator('5dc1ab22bbc1f70017c2ffa2');
   getalllists();
 
   var postrequest = document.getElementById("postrequest");
