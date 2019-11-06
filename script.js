@@ -125,7 +125,6 @@ function bridgecreateaufruf(itemnr, jsoncontent) {
   createaufruf(itembought, itemname, itemid, itemnr);
 }
 
-
 async function allitemget(jsoncontent) {
   delitemsbyparent("qrcodelistpic"); // vorhandenen QRCode löschen
   makingqrcode(urlshort + listid, "80", "90EE90", "qrcodelistpic");
