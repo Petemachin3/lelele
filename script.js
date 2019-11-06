@@ -493,7 +493,6 @@ window.onload = function () {
     }
   });
 
-  checkBox = document.getElementById("subscribeNews6");
 
   var listidpost = document.getElementById("listidpost");
   listidpost.addEventListener("click", function () {
@@ -541,5 +540,4 @@ window.onload = function () {
       getlistbyid();
     }
   });
-
 }
