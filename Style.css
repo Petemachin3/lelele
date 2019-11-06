@@ -376,12 +376,11 @@ dialog[open] {
 @media (max-width: 640px) {
   .grid{
     grid-template-columns: 0 auto;
-    grid-template-rows: 150px min-content min-content min-content min-content;
+    grid-template-rows: 150px min-content min-content min-content;
     grid-template-areas:
     "header headerlistname"
     "side side"
     "inhalt inhalt"
-    "inhaltfooter inhaltfooter"
     "footer footer"
   }
   .inhalt .side .footer{
