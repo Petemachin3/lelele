@@ -437,12 +437,6 @@ function closedialog(dialog) {
   dialog.close();
 }
 
-// function setlistid(){
-//   var listid = document.getElementById("idlistinput").value;
-//   urlgenerator(listid);
-//   closedialog();
-// }
-
 function setstartpage() {
   // allitemsdel();
   delitemsbyparent("qrcodelistpic"); //QRCode löschen
